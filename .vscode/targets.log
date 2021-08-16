@@ -1,0 +1,771 @@
+make all -f "/Users/kanata/Desktop/GeisterLibrary-master/makefile" --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+ 
+sed: 1: "src/player.cpp": unterminated substitute in regular expression
+ 
+
+# Make data base, printed on Mon Aug 16 22:07:11 2021
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 44)
+DEFS := -DPLAYER_NAME=Player -DPLAYER_CLASS=
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/kanata/Desktop/GeisterLibrary-master
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"ja","availableLanguages":{"*":"ja"},"_languagePackId":"a88c80bd84ba28ea5414194de67b89dd.ja","_translationsConfigFile":"/Users/kanata/Library/Application Support/Code/clp/a88c80bd84ba28ea5414194de67b89dd.ja/tcf.json","_cacheRoot":"/Users/kanata/Library/Application Support/Code/clp/a88c80bd84ba28ea5414194de67b89dd.ja","_resolvedLanguagePackCoreLocation":"/Users/kanata/Library/Application Support/Code/clp/a88c80bd84ba28ea5414194de67b89dd.ja/379476f0e13988d90fab105c5c19e7abc8b1dea8","_corruptedFile":"/Users/kanata/Library/Application Support/Code/clp/a88c80bd84ba28ea5414194de67b89dd.ja/corrupted.info","_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 37)
+PLAYER_CLASS_FILE := 
+# makefile (from `obj/simulator.d', line 1)
+MAKEFILE_LIST :=  /Users/kanata/Desktop/GeisterLibrary-master/makefile obj/geister.d obj/player.d obj/simulator.d
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 48)
+OBJ_DIR = obj
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 21)
+CXXFLAGS = -MMD -MP -std=c++17 -w -O -fPIC -stdlib=libc++
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 53)
+OBJS := obj/client.o obj/competition.o obj/geister.o obj/player.o obj/simulator.o obj/training.o obj/AI.o obj/Encode2.o obj/chototsuPlayer.o obj/chototsuPlayerのコピー.o obj/randomPlayer.o
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/62/57vqj07x0rv7jynrn9h29l280000gn/T/vscode-ipc-779e72d4-80ae-4cd9-8f25-3b4f9fdb5b64.sock
+# environment
+VSCODE_CWD = /
+# environment
+PATH = /usr/local/opt/tcl-tk/bin:/usr/local/opt/tcl-tk/bin:/Users/kanata/.pyenv/shims:/Users/kanata/.pyenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 94)
+player_OBJ := obj/player.o obj/geister.o obj/simulator.o
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 32)
+PLAYER_NAME = Player
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 56)
+VPATH := Player:src
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+PYENV_ROOT = /Users/kanata/.pyenv
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 22)
+LDFLAGS = -ldl -lpthread -stdlib=libc++ -lc++experimental -lc++abi -lc++fs
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.K55uF8nSL3/Listeners
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /Users/kanata/Desktop/GeisterLibrary-master
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+# environment
+HOME = /Users/kanata
+# default
+MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/kanata/Library/Application Support/Code/CachedData/379476f0e13988d90fab105c5c19e7abc8b1dea8
+# environment
+LOGNAME = kanata
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 52)
+SRCS := client.cpp competition.cpp geister.cpp player.cpp simulator.cpp training.cpp AI.cpp Encode2.cpp chototsuPlayer.cpp chototsuPlayerのコピー.cpp randomPlayer.cpp
+# environment
+SHLVL = 1
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = kanata
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 59)
+EXES := client.out competition.out training.out Player.out
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 19)
+EXE_EXT = out
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/62/57vqj07x0rv7jynrn9h29l280000gn/T/
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/kanata/Library/Application Support/Code/1.59.0-main.sock
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 60)
+TARGETS := bin/randomPlayer.so bin/chototsuPlayer.so bin/Player.so bin/client.out bin/competition.out bin/training.out bin/Player.out
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+XPC_SERVICE_NAME = com.microsoft.VSCode.9248
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+__CF_USER_TEXT_ENCODING = 0x1F5:0x1:0xE
+# default
+MAKEFILES := 
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 46)
+SRC_DIR = src
+# environment
+VSCODE_BROWSER_CODE_LOADING = bypassHeatCheck
+# automatic
+<F = $(notdir $<)
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 34)
+PLAYER_CLASS = $(PC)
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 2)
+CXX = clang++
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 47)
+BIN_DIR = bin
+# environment
+LC_ALL = C
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 58)
+LIBS := randomPlayer.so chototsuPlayer.so Player.so
+# automatic
+^F = $(notdir $^)
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 54)
+DEPS := obj/client.d obj/competition.d obj/geister.d obj/player.d obj/simulator.d obj/training.d obj/AI.d obj/Encode2.d obj/chototsuPlayer.d obj/chototsuPlayerのコピー.d obj/randomPlayer.d
+# default
+SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/local/include
+# environment
+MAKELEVEL := 0
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 18)
+LIB_EXT = so
+# environment
+LANG = C
+# environment
+VSCODE_PID = 31205
+# makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 17)
+OBJ_EXT = o
+# variable set hash-table stats:
+# Load=83/1024=8%, Rehash=0, Collisions=9/205=4%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# obj (device 16777224, inode 5330994): 8 files, no impossibilities.
+# . (device 16777224, inode 5329516): 19 files, no impossibilities.
+# src/obj: could not be stat'd.
+# Player/obj: could not be stat'd.
+# src (device 16777224, inode 5330224): 8 files, no impossibilities.
+# Player (device 16777224, inode 5329518): 30 files, no impossibilities.
+
+# 65 files, no impossibilities in 6 directories.
+
+# Implicit Rules
+
+bin/%.so: obj/%.o obj/geister.o
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 102):
+	$(CXX) $(CXXFLAGS) -shared $^ $(LDFLAGS) -o $@
+	
+
+bin/%.out: obj/%.o obj/geister.o
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 105):
+	$(CXX) $(CXXFLAGS) $^ $(LDFLAGS) -o $@
+	
+
+obj/%.o: %.cpp
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 109):
+	$(CXX) $(CXXFLAGS) $(DEFS) -I. -I./include -I./include/lib -c $< -o $@
+	
+
+# 3 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+# Not a target:
+obj/%.o:
+#  Precious file (prerequisite of .PRECIOUS).
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+ 
+# Not a target:
+bin/training.out:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: bin/randomPlayer.so bin/chototsuPlayer.so bin/Player.so bin/client.out bin/competition.out bin/training.out bin/Player.out
+#  Phony target (prerequisite of .PHONY).
+#  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+
+include/unit.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-07-20 00:44:38
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+.PHONY: all clean set-release release set-debug debug
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/random.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-05-13 15:59:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+.PRECIOUS: obj/%.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+set-debug:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 84):
+	$(eval CXXFLAGS := $(CXXFLAGS:-w=))
+	$(eval CXXFLAGS := $(CXXFLAGS:-O%=))
+	$(eval CXXFLAGS += -Wall -Wextra -O0 -g3)
+	
+
+include/geister.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-05-13 15:59:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+src/geister.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-05-13 15:59:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+include/hand.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-08-04 00:14:54
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+Player/numpy.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2013-08-26 21:29:37
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+debug: set-debug all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 90):
+	@mkdir -p $(BIN_DIR)/$@
+	@cp $(TARGETS) $(BIN_DIR)/$@
+	
+
+# Not a target:
+obj/chototsuPlayer.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+bin/Player.out: obj/player.o obj/geister.o obj/simulator.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 96):
+	$(CXX) $(CXXFLAGS) $^ $(LDFLAGS) -o $@
+	
+
+# Not a target:
+/Users/kanata/Desktop/GeisterLibrary-master/makefile:
+#  Implicit rule search has been done.
+#  Last modified 2021-07-25 00:18:34
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+obj/randomPlayer.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+bin/Player.so: obj/player.o obj/geister.o obj/simulator.o
+#  Implicit rule search has not been done.
+#  Last modified 2021-08-09 19:25:29
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 99):
+	$(CXX) $(CXXFLAGS) -shared $^ $(LDFLAGS) -o $@
+	
+
+include/simulator.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-08-08 16:21:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+obj/competition.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+src/simulator.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/player.o: src/player.cpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp Player/all.hpp Player/chototsuPlayer.hpp include/random.hpp Player/humanPlayer.hpp Player/randomPlayer.hpp Player/MCPlayer.hpp include/simulator.hpp Player/Machine.hpp Player/numpy.hpp Player/Encode.hpp
+#  Precious file (prerequisite of .PRECIOUS).
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `player'
+#  Last modified 2021-08-10 18:15:06
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := obj/player.o
+# automatic
+# % := 
+# automatic
+# * := player
+# automatic
+# + := src/player.cpp src/player.cpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp Player/all.hpp Player/chototsuPlayer.hpp include/random.hpp Player/humanPlayer.hpp Player/randomPlayer.hpp Player/MCPlayer.hpp include/simulator.hpp Player/Machine.hpp Player/numpy.hpp Player/Encode.hpp
+# automatic
+# | := 
+# automatic
+# < := src/player.cpp
+# automatic
+# ^ := src/player.cpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp Player/all.hpp Player/chototsuPlayer.hpp include/random.hpp Player/humanPlayer.hpp Player/randomPlayer.hpp Player/MCPlayer.hpp include/simulator.hpp Player/Machine.hpp Player/numpy.hpp Player/Encode.hpp
+# automatic
+# ? := Player/Machine.hpp
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 109):
+	$(CXX) $(CXXFLAGS) $(DEFS) -I. -I./include -I./include/lib -c $< -o $@
+	
+
+# Not a target:
+obj/geister.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  Last modified 2021-08-08 19:31:13
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+bin/chototsuPlayer.so: obj/chototsuPlayer.o obj/geister.o
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `chototsuPlayer'
+#  Last modified 2021-08-08 19:31:13
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 102):
+	$(CXX) $(CXXFLAGS) -shared $^ $(LDFLAGS) -o $@
+	
+
+# Not a target:
+obj/player.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  Last modified 2021-08-10 18:15:06
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+release: set-release all
+ 
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 79):
+	@mkdir -p $(BIN_DIR)/$@
+	@cp $(TARGETS) $(BIN_DIR)/$@
+	
+
+bin/randomPlayer.so: obj/randomPlayer.o obj/geister.o
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `randomPlayer'
+#  Last modified 2021-08-08 19:31:13
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 102):
+	$(CXX) $(CXXFLAGS) -shared $^ $(LDFLAGS) -o $@
+	
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+bin/competition.out:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/client.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+obj/chototsuPlayerのコピー.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/chototsuPlayer.o: Player/chototsuPlayer.cpp
+#  Precious file (prerequisite of .PRECIOUS).
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `chototsuPlayer'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 109):
+	$(CXX) $(CXXFLAGS) $(DEFS) -I. -I./include -I./include/lib -c $< -o $@
+	
+
+# Not a target:
+Player/randomPlayer.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-05-13 15:59:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Player/chototsuPlayer.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-05-13 15:59:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/randomPlayer.o: Player/randomPlayer.cpp
+#  Precious file (prerequisite of .PRECIOUS).
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `randomPlayer'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 109):
+	$(CXX) $(CXXFLAGS) $(DEFS) -I. -I./include -I./include/lib -c $< -o $@
+	
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 68):
+	rm -rf $(OBJ_DIR)/*.*
+	
+
+# Not a target:
+obj/simulator.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  Last modified 2021-08-08 19:31:13
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+include/impl/unit.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-08-08 19:18:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/geister.o: src/geister.cpp src/geister.cpp include/geister.hpp include/unit.hpp include/impl/unit.hpp include/hand.hpp include/result.hpp include/impl/geister.hpp
+#  Precious file (prerequisite of .PRECIOUS).
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `geister'
+#  Last modified 2021-08-08 19:31:13
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 109):
+	$(CXX) $(CXXFLAGS) $(DEFS) -I. -I./include -I./include/lib -c $< -o $@
+	
+
+include/treeNode.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-08-09 19:45:07
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+bin/client.out:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+Player/MCPlayer.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-08-08 22:05:48
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+Player/chototsuPlayer.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-08-03 23:23:54
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+Player/all.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-07-08 01:38:26
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+Player/Machine.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-08-10 18:38:08
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+include/result.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-05-13 15:59:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+Player/randomPlayer.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-05-18 17:58:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+obj/Encode2.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+obj/AI.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+include/impl/geister.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-05-13 15:59:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+Player/Encode.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-08-10 18:12:54
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+obj/training.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+Player/humanPlayer.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-05-13 15:59:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+set-release:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 72):
+	$(eval DEFS += -DNDEBUG)
+	$(eval CXXFLAGS := $(CXXFLAGS:-W%=))
+	$(eval CXXFLAGS := $(CXXFLAGS:-O%=))
+ 
+	$(eval CXXFLAGS += -w -Ofast -march=native -mtune=native)
+	
+
+include/player.hpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-08-09 19:55:16
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+src/player.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-05-13 15:59:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+obj/simulator.o: src/simulator.cpp include/geister.hpp include/unit.hpp include/impl/unit.hpp include/hand.hpp include/result.hpp include/impl/geister.hpp include/simulator.hpp include/random.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=58/1024=6%, Rehash=0, Collisions=14/234=6%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# General (`VPATH' variable) search path:
+# Player:src
+
+# # of strings in strcache: 12
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 3855 / max = 3855 / min = 3855 / avg = 3855
+
+# Finished Make data base on Mon Aug 16 22:07:11 2021
+
+ 

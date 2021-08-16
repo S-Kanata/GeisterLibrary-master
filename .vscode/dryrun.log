@@ -1,0 +1,21 @@
+make -f "/Users/kanata/Desktop/GeisterLibrary-master/makefile" --dry-run --always-make --keep-going --print-directory
+sed: 1: "src/player.cpp": unterminated substitute in regular expression
+ 
+make: Entering directory `/Users/kanata/Desktop/GeisterLibrary-master'
+c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c src/geister.cpp -o obj/geister.o
+c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c Player/randomPlayer.cpp -o obj/randomPlayer.o
+c++ -MMD -MP -std=c++17 -w -O -fPIC -shared obj/randomPlayer.o obj/geister.o -ldl -lpthread -o bin/randomPlayer.so
+c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c Player/chototsuPlayer.cpp -o obj/chototsuPlayer.o
+c++ -MMD -MP -std=c++17 -w -O -fPIC -shared obj/chototsuPlayer.o obj/geister.o -ldl -lpthread -o bin/chototsuPlayer.so
+c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c src/player.cpp -o obj/player.o
+c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c src/simulator.cpp -o obj/simulator.o
+c++ -MMD -MP -std=c++17 -w -O -fPIC -shared obj/player.o obj/geister.o obj/simulator.o -ldl -lpthread -o bin/Player.so
+c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c src/client.cpp -o obj/client.o
+c++ -MMD -MP -std=c++17 -w -O -fPIC obj/client.o obj/geister.o -ldl -lpthread -o bin/client.out
+c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c src/competition.cpp -o obj/competition.o
+c++ -MMD -MP -std=c++17 -w -O -fPIC obj/competition.o obj/geister.o -ldl -lpthread -o bin/competition.out
+c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c src/training.cpp -o obj/training.o
+c++ -MMD -MP -std=c++17 -w -O -fPIC obj/training.o obj/geister.o -ldl -lpthread -o bin/training.out
+c++ -MMD -MP -std=c++17 -w -O -fPIC obj/player.o obj/geister.o obj/simulator.o -ldl -lpthread -o bin/Player.out
+make: Leaving directory `/Users/kanata/Desktop/GeisterLibrary-master'
+ 

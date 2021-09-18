@@ -9,10 +9,10 @@
                     "${workspaceFolder}/Player"
                 ]
             },
-
             "includePath": [
                 "${workspaceFolder}/",
-                "${workspaceFolder}/include/"
+                "${workspaceFolder}/include/",
+                "${workspaceFolder}/Player"
             ],
             "defines": [],
             "macFrameworkPath": [

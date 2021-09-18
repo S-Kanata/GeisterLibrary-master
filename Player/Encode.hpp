@@ -73,6 +73,34 @@ void Load_CSV_float(std::string filepath, std::vector<float>& vec){
     return;
 }
 
+void Load_CSV_double(std::string filepath, std::vector<double>& vec){
+
+    //ファイルの読み込み
+    std::ifstream ifs(filepath);
+
+    //開かなかったらエラー
+    if (!ifs)
+    {
+        cout << "Error! File can not be opened" << endl;
+        return ;
+    }
+
+    std::string str = "";
+    std::vector<string> strList;
+    strList.reserve(8129);
+    
+    while (getline(ifs, str))
+    {      
+        strList.push_back(str);
+    }
+
+    for(int i = 0; i < strList.size(); i++){
+        vec[i] = std::stof(strList[i]);
+    }
+
+    //printf("Read Successful!\n");
+    return;
+}
 
 
 /*

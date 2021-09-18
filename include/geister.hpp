@@ -90,6 +90,11 @@ inline std::ostream& operator<<(std::ostream& stream, const Geister& value){
     return stream << value.toString();
 }
 
+static bool Board_equal(struct Hand a, struct Hand b) {
+    return  a.direct == b.direct &&
+            a.unit == b.unit;
+}
+
 #include "impl/geister.hpp"
 
 #endif

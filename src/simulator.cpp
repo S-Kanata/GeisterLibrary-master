@@ -8,6 +8,8 @@
 
 cpprefjp::random_device Simulator::rd;
 std::mt19937 Simulator::mt(rd());
+int MoveCount; //手数
+int MoveIndex; //手数
 
 Simulator::Simulator(const Simulator& s): root(s.root), depth(s.depth)
 {
@@ -124,6 +126,42 @@ double Simulator::playout(){
     return evaluate();
 }
 
+/*
+double Simulator::playout_withpolicy(){
+    static std::uniform_int_distribution<> selector;
+    std::array<Hand, 32> lm;
+    while(true){
+        if(current.isEnd())
+            break;
+        // 相手の手番
+        // std::vector<Hand> lm2 = current.getLegalMove2nd();
+        // selector.param(std::uniform_int_distribution<>::param_type(0, lm2.size() - 1));
+        current.changeSide();
+        GetCurrentPi(current);
+        MoveIndex = ReturnHand();
+        legalMoves = current.getLegalMove1st();
+        auto nexthand2nd = legalMoves[MoveIndex];
+        current.move(nexthand2nd);
+        if(current.isEnd())
+            break;
+        // 自分の手番
+        // std::vector<Hand> lm1 = current.getLegalMove1st();
+        // selector.param(std::uniform_int_distribution<>::param_type(0, lm1.size() - 1));
+        current.changeSide();
+        GetCurrentPi(current);
+        MoveIndex = ReturnHand();
+        legalMoves = current.getLegalMove1st();
+        auto nexthand1st = legalMoves[MoveIndex];
+        current.move(nexthand1st);
+    }
+    
+    
+    return evaluate();
+}
+*/
+
+
+
 double Simulator::run(const size_t count){
     double result = 0.0;
     for(size_t i = 0; i < count; ++i){
@@ -136,6 +174,21 @@ double Simulator::run(const size_t count){
     }
     return result;
 }
+
+/*
+double Simulator::run_withpolicy(const size_t count){
+    double result = 0.0;
+    for(size_t i = 0; i < count; ++i){
+        current = root;
+        setColor(getRandomPattern());
+        // current.printBoard();
+        // std::cout << current.result() << "\n";
+        // setColorRandom();
+        result += playout_withpolicy();
+    }
+    return result;
+}
+*/
 
 double Simulator::run(std::string_view ptn, const size_t count){
     double result = 0.0;

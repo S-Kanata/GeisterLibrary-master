@@ -7,7 +7,6 @@
 #include "result.hpp"
 #include <string_view>
 
-
 class Simulator{
 protected:
     static cpprefjp::random_device rd;
@@ -31,8 +30,13 @@ public:
     virtual void setColorRandom();
 
     virtual double playout();
+    //virtual double playout_withpolicy();
     
     virtual double run(const size_t count = 1);
+
+    //virtual double run_withpolicy(const size_t count = 1);
+
+    //virtual double run_withpolicy(std::string_view, const size_t count = 1);
 
     virtual double run(std::string_view, const size_t count = 1);
 

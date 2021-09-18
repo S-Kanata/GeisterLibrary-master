@@ -17,7 +17,6 @@ public:
     MCPlayer(): mt(rd()){
     }
 
-
     virtual std::string decideRed(){
         cpprefjp::random_device rd;
         std::mt19937 mt(rd());

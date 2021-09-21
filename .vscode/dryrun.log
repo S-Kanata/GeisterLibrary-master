@@ -10,7 +10,6 @@ c++ -MMD -MP -std=c++17 -w -O -fPIC -shared obj/chototsuPlayer.o obj/geister.o -
 c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c src/player.cpp -o obj/player.o
 c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c src/simulator.cpp -o obj/simulator.o
 c++ -MMD -MP -std=c++17 -w -O -fPIC -shared obj/player.o obj/geister.o obj/simulator.o -ldl -lpthread -o bin/Player.so
- 
 c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c src/client.cpp -o obj/client.o
 c++ -MMD -MP -std=c++17 -w -O -fPIC obj/client.o obj/geister.o -ldl -lpthread -o bin/client.out
 c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -I. -I./include -I./include/lib -c src/competition.cpp -o obj/competition.o

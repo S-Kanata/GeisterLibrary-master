@@ -6,7 +6,7 @@ from tkinter import filedialog
 import geister
 
 kifu = []
-with open('/Users/kanata/Desktop/GeisterLibrary-master/pytools/log.txt', 'r') as f:
+with open('/Users/kanata/Desktop/GeisterLibrary-master/log/RL.out-TEST.out/2021-09-20_00-45-15(10)/RL.out-TEST.out_2021-09-20_01-02-46.0.txt', 'r') as f:
     kifu = f.readlines()
     kifu = kifu[:-1]
 

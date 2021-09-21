@@ -3,3 +3,4 @@
 #include "randomPlayer.hpp"
 #include "MCPlayer.hpp"
 #include "Machine.hpp"
+#include "Reinforce.hpp"

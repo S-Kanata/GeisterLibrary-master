@@ -391,7 +391,7 @@ public:
                     nextX.push_back(NextS[i]*NextS[j]);
                 }
             }
-        for(int i = 1; i < bias; i++){
+        for(int i = 1; i < bias; i++){ //2021/09/21 biasからbias-1にしたが結局戻した
             nextX[nextX.size()-i] = 1;
         }
         return nextX;
@@ -519,8 +519,8 @@ public:
     }
     
     //脱出可能かどうかチェック
-    bool CanEscape(){
-        auto legalMoves = currentSimulate.getLegalMove1st();
+    bool CanEscape(Geister currentGame){
+        auto legalMoves = currentGame.getLegalMove1st();
         for( auto move : legalMoves) {
             Unit u = move.unit;
             if(u.isBlue() && (u.x() == 0 && u.y() == 0) ) { return true; }
@@ -529,8 +529,8 @@ public:
         return false;
     }
 
-    Hand EscapeHand(){
-        auto legalMoves = currentSimulate.getLegalMove1st();
+    Hand EscapeHand(Geister currentGame){
+        auto legalMoves = currentGame.getLegalMove1st();
         for( auto move : legalMoves) {
             Unit u = move.unit;
             if(u.isBlue() && (u.x() == 0 && u.y() == 0) ) { return Hand{u, 'W'}; }
@@ -725,8 +725,9 @@ public:
             }
             // 相手の手番
             currentSimulate.changeSide();
-            BoardforPi = setUnknown(currentSimulate);
-            GetCurrentPi(BoardforPi);
+            GetCurrentPi(currentSimulate);
+            //BoardforPi = setUnknown(currentSimulate);
+            //GetCurrentPi(BoardforPi);
             int index = DecideIndex();
             enemylm = currentSimulate.getLegalMove1st();
             m2 = enemylm[index];
@@ -746,8 +747,9 @@ public:
 
             // 自分の手番
             currentSimulate.changeSide();
-            BoardforPi = setUnknown(currentSimulate);
-            GetCurrentPi(BoardforPi);
+            GetCurrentPi(currentSimulate);
+            //BoardforPi = setUnknown(currentSimulate);
+            //GetCurrentPi(BoardforPi);
             int index2 = DecideIndex();
             lm = currentSimulate.getLegalMove1st();
             m1 = lm[index2];
@@ -863,8 +865,19 @@ public:
     virtual std::string decideHand(std::string_view res){
         game.setState(res);
         moveNum++;
+        auto legalMoves = game.getLegalMove1st();
+        if(CanEscape(game)){
+            auto lastHand = EscapeHand(game);
+            return lastHand;
+        }
+
 
         bool isCheckon = false;
+/*         if (moveNum > 50){
+            MaxDepth = 100-moveNum;
+        } else {
+            MaxDepth = 50;
+        } */
         MaxDepth = 50;
         //モンテカルロシミュレーションで着手を決定
         MoveIndex = SimulatedHand(isCheckon, game);
@@ -880,7 +893,7 @@ public:
         
         //GetCurrentPi(game);
         //MoveIndex = ReturnHand();
-        auto legalMoves = game.getLegalMove1st();
+        
         auto nexthand = legalMoves[MoveIndex];
         return nexthand;
         

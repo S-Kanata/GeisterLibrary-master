@@ -485,6 +485,7 @@ Geister Geister::mask(){
     return res;
 }
 
+
 void Geister::changeSide(){
     std::swap(takenBlue1st, takenBlue2nd);
     std::swap(takenRed1st, takenRed2nd);

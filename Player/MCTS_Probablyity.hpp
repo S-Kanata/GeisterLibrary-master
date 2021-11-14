@@ -5,18 +5,17 @@
 #include "numpy.hpp"
 #include <iostream>
 #include "Encode.hpp"
-#include "simulator.hpp"
 #include <array>
 #include <algorithm>
 #include <map>
 //#include "Encode2.cpp"
 
-class MachinePlayer: public Player{
+class MCTS_withProb: public Player{
     cpprefjp::random_device rd;
     std::mt19937 mt;
     std::uniform_int_distribution<int> choiceRandom;
 public:
-    MachinePlayer():
+    MCTS_withProb():
     mt(rd()),
     choiceRandom(0, 1)
     {}
@@ -71,6 +70,71 @@ public:
             "CDEG", "CDEH", "CDFG", "CDFH", "CDGH", "CEFG", "CEFH",
             "CEGH", "CFGH", "DEFG", "DEFH", "DEGH", "DFGH", "EFGH"
         };
+
+
+    //MCTSのノードのクラス化
+    class MCTNode: public SIMULATOR{
+        //メンバ変数
+        int visitCount;
+        static int totalCount;
+        double reward;
+        Geister currentBoard;
+
+        //コンストラクタ
+        MCTNode(Geister g):  visitCount(0), reward(0)
+        {
+        }
+
+        double calcUCB(){
+            constexpr double alpha = 1.5;
+            return (reward / std::max(visitCount, 1))
+                + (alpha * sqrt(log((double)totalCount) / std::max(visitCount, 1)));
+        }
+
+        void expand(){
+            root.changeSide();
+            auto legalMoves = root.getLegalMove1st();
+            for(auto&& lm: legalMoves){
+                auto child = *this;
+                child.root.move(lm);
+                children.push_back(child);
+            }
+            root.changeSide();
+        }
+
+        double select(){
+            visitCount++;
+            if(auto res = static_cast<int>(root.getResult()); res != 0){
+                totalCount++;
+                reward += res;
+                return -res;
+            }
+            double res;
+            if(!children.empty()){
+                std::vector<double> ucbs(children.size());
+                std::transform(children.begin(), children.end(), ucbs.begin(), [](auto& x){return x.calcUCB();});
+                auto&& max_iter = std::max_element(ucbs.begin(), ucbs.end());
+                int index = std::distance(ucbs.begin(), max_iter);
+                res = children[index].select();
+
+            }
+            // 訪問回数が規定数を超えていたら子ノードをたどる
+            else if(visitCount > expandCount){
+                // 子ノードがなければ展開
+                expand();
+                for(auto&& child: children){
+                    res = child.select();
+                }
+            }
+            // プレイアウトの実行
+            else{
+                totalCount++;
+                res = run_with_prob();
+            }
+            reward += res;
+            return -res;
+        }
+    };
 
     std::array<char*, 70> possible_pattern;
     //駒配置セット
@@ -201,186 +265,8 @@ public:
             }
             states_1ht.push_back(1);
 
-        /*for(int i = 0 ; i < states_1ht.size(); i++){
-            printf("%d, %d\n", i, states_1ht[i]);    
-        }*/
         return states_1ht;
     }
-    //次の一手のベクトル表現s
-    void DecideNextS(Geister copiedGame) {
-            //次の一手のベクトル表現12
-        std::vector<int> allyBlue = std::vector<int> (36);
-        std::vector<int> allyRed = std::vector<int> (36);
-        std::vector<int> enemyObj = std::vector<int> (36);
-        std::vector<int> takenBlueAlly = std::vector<int> (3);
-        std::vector<int> takenBlueEnemy = std::vector<int> (3);
-        std::vector<int> takenRedAlly = std::vector<int> (3);
-        std::vector<int> takenRedEnemy = std::vector<int> (3);
-        std::vector<int> IstakeObj{0};
-        std::vector<int> IsEscapeBlue{0};
-        NextS.clear();
-        NextS.reserve(127);
-      //for(int l = 0; l < i; ++l)
-      //for(int l = 0; l < legalMoves.size(); ++l){
-        
-
-    //copiedGame.move(legalMoves[0]);
-
-        //駒の位置のベクトル表現
-        const std::array<Unit, 16>& units = copiedGame.allUnit();
-            for(const Unit& u: units){
-                if(u.x() < 8 && u.y() < 8){
-                    auto index = u.x()+6*u.y();
-                if(u.color() == UnitColor::Blue){
-                    allyBlue[index] = 1;
-                } else if (u.color() == UnitColor::Red) {
-                  allyRed[index] = 1;
-                } else if (u.color() == UnitColor::unknown) {
-                   enemyObj[index] = 1;
-                }
-            }
-        }
-
-        //取られた駒のone-hot表現
-        int n = game.takenCount(UnitColor::Blue);
-        if(n != 0) {
-            takenBlueAlly[n-1] = 1;
-        }
-        n = game.takenCount(UnitColor::Red);
-        if(n != 0) {
-            takenRedAlly[n-1] = 1;
-        }
-        n = game.takenCount(UnitColor::blue);
-        if(n != 0) {
-            takenBlueEnemy[n-1] = 1;
-        }
-        n = game.takenCount(UnitColor::red);
-        if(n != 0) {
-            takenRedEnemy[n-1] = 1;
-        }
-
-        //コマを取るor取らない
-        const std::array<Unit, 16>& CurrentUnits = game.allUnit();
-        int count1 = 0;
-        int count2 = 0;
-        for(const Unit& u: units){
-            if (u.x() == 9 ) count1++ ;
-        }
-        for(const Unit& u: CurrentUnits){
-            if (u.x() == 9) count2++ ;
-        }
-        if (count1 != count2) IstakeObj[0] = 1;
-
-        //コマが脱出するorしない
-        for(const Unit& u: units){
-            if (u.x() == 8) IsEscapeBlue[0] = 1 ;
-        }
-
-        //ベクトルを結合してsに追加
-        NextS.insert(NextS.end(),allyBlue.begin(), allyBlue.end());
-        NextS.insert(NextS.end(),allyRed.begin(), allyRed.end());
-        NextS.insert(NextS.end(),enemyObj.begin(), enemyObj.end());
-        NextS.insert(NextS.end(),takenBlueAlly.begin(), takenBlueAlly.end());
-        NextS.insert(NextS.end(),IstakeObj[0]);
-        NextS.insert(NextS.end(),takenRedAlly.begin(), takenRedAlly.end());
-        NextS.insert(NextS.end(),takenBlueEnemy.begin(), takenBlueEnemy.end());
-        NextS.insert(NextS.end(),takenRedEnemy.begin(), takenRedEnemy.end());
-        NextS.insert(NextS.end(),IsEscapeBlue[0]);
-
-
-        for(int i = 0; i < 5; i++)
-        {
-            NextS.push_back(0);
-        }
-        //auto itr = NextS.end();
-        //NextS.erase(itr);
-    }
-    /*
-
-    std::vector<int> DecideNextS2(Geister copiedGame) {
-        std::vector<int> NextS2 = std::vector<int> {0};
-        //次の一手のベクトル表現12
-        std::vector<int> allyBlue = std::vector<int> (36);
-        std::vector<int> allyRed = std::vector<int> (36);
-        std::vector<int> enemyObj = std::vector<int> (36);
-        std::vector<int> takenBlueAlly = std::vector<int> (3);
-        std::vector<int> takenBlueEnemy = std::vector<int> (3);
-        std::vector<int> takenRedAlly = std::vector<int> (3);
-        std::vector<int> takenRedEnemy = std::vector<int> (3);
-        std::vector<int> IstakeObj{0};
-        std::vector<int> IsEscapeBlue{0};
-      //for(int l = 0; l < i; ++l)
-      //for(int l = 0; l < legalMoves.size(); ++l){
-        
-
-    //copiedGame.move(legalMoves[0]);
-
-        //駒の位置のベクトル表現
-        const std::array<Unit, 16>& units = copiedGame.allUnit();
-            for(const Unit& u: units){
-                if(u.x() < 8 && u.y() < 8){
-                    auto index = u.x()*6+u.y();
-                    if(u.color() == UnitColor::Blue){
-                        allyBlue[index] = 1;
-                    } else if (u.color() == UnitColor::Red) {
-                        allyRed[index] = 1;
-                    } else if (u.color() == UnitColor::unknown) {
-                       enemyObj[index] = 1;
-                    }
-                }
-            }
-        
-
-        //取られた駒のone-hot表現
-        int n = copiedGame.takenCount(UnitColor::Blue);
-        if(n != 0) {
-            takenBlueAlly[n-1] = 1;
-        }
-        n = copiedGame.takenCount(UnitColor::Red);
-        if(n != 0) {
-            takenRedAlly[n-1] = 1;
-        }
-        n = copiedGame.takenCount(UnitColor::blue);
-        if(n != 0) {
-            takenBlueEnemy[n-1] = 1;
-        }
-        n = copiedGame.takenCount(UnitColor::red);
-        if(n != 0) {
-            takenRedEnemy[n-1] = 1;
-        }
-        
-        //コマを取るor取らない
-        const std::array<Unit, 16>& CurrentUnits = game.allUnit();
-        int count1 = 0;
-        int count2 = 0;
-        for(const Unit& u: units){
-            if (u.x() == 9 ) count1 +=  1;
-        }
-        for(const Unit& u: CurrentUnits){
-            if (u.x() == 9) count2 += 1 ;
-        }
-        if (count1 != count2) IstakeObj[0] = 1;
-
-        //コマが脱出するorしない
-        for(const Unit& u: units){
-            if (u.x() == 8) IsEscapeBlue[0] = 1 ;
-        }
-        //ベクトルを結合してsに追加
-        NextS2.insert(NextS2.end(),allyBlue.begin(), allyBlue.end());
-        NextS2.insert(NextS2.end(),allyRed.begin(), allyRed.end());
-        NextS2.insert(NextS2.end(),enemyObj.begin(), enemyObj.end());
-        NextS2.insert(NextS2.end(),takenBlueAlly.begin(), takenBlueAlly.end());
-        NextS2.insert(NextS2.end(),takenRedAlly.begin(), takenRedAlly.end());
-        NextS2.insert(NextS2.end(),takenBlueEnemy.begin(), takenBlueEnemy.end());
-        NextS2.insert(NextS2.end(),takenRedEnemy.begin(), takenRedEnemy.end());
-        NextS2.insert(NextS2.end(), IstakeObj[0]);
-        NextS2.insert(NextS2.end(), IsEscapeBlue[0]);
-
-        //auto itr = NextS.end();
-        //NextS.erase(itr);
-        return NextS2;
-    }*/
-    
 
     //特徴量Xの計算
     std::vector<int> DecideNextX(int bias){
@@ -433,43 +319,7 @@ public:
         for (int l = 0; l < Moves_size; l++){
             poss_pi[l] = exp(pri_h[l])/pi_sum;
         }
-/*         std::vector<float>::iterator iter = std::max_element(poss_pi.begin(), poss_pi.end());
-        int index = std::distance(poss_pi.begin(), iter);
-        next_h = -INFINITY;
-        for(int p = 0; p < poss_pi.size(); p++){
-            if(p != index){
-                if(poss_pi[p] > next_h){
-                    next_h = poss_pi[p];
-                }
-            }
-        } */
     }
-
-    /* Piの決定保存用
-    void DecidePi(){
-        legalMoves = candidateHand();
-        int Moves_size = legalMoves.size();
-        poss_pi = std::vector<float> (Moves_size);
-        pri_h = std::vector<float> (Moves_size);
-        float pi_sum = 0;
-        max_h = -INFINITY;
-        for(int l = 0; l < Moves_size; l++){
-            //次の一手を更新
-            Geister copiedGame = game;
-            copiedGame.move(legalMoves[l]);
-            DecideNextS(copiedGame);
-            DecideNextX();
-            DecidePriority_h(l);
-        }
-        adjust_h(Moves_size);
-        for (int l = 0; l < Moves_size; l++){
-            pi_sum += exp(pri_h[l]);
-        }
-        for (int l = 0; l < Moves_size; l++){
-            poss_pi[l] = exp(pri_h[l])/pi_sum;
-        }
-    }
-    */
     
     //行動確率に従って手を選択
     int DecideIndex(){
@@ -539,38 +389,7 @@ public:
     }
 
     #pragma endregion
-
-    #pragma region  θの学習
-
-    void DecideRoundPi() {
-        round_pi = std::vector<double> (8128);
-        auto legalMoves = candidateHand();
-        std::vector<int> NextX_Current = NextX;
-        for(int l = 0; l < legalMoves.size(); l++){
-            Geister copiedGame = game;
-            copiedGame.move(legalMoves[l]);
-            DecideNextS(copiedGame);
-            DecideNextX(legalMoves.size());
-            for(int i = 0; i < NextX_Current.size(); i++)
-            round_pi[i] = NextX_Current[i] - poss_pi[l]*NextX[i];
-        }
-    }
-
-    /*
-    void learnTheta(int result, int episodes){
-        for(int i = 0; i < theta.size();)
-        theta = 
-        std::string filepath("Player/theta/theta%d.dat", episodes);
-        write_binary_float(filepath, theta);
-        //read_binary_float("Player/theta/test.dat");
-    }
-    */
     
-    #pragma endregion
-    
-    #pragma region  探索
-    
-
     #pragma region シミュレータの実装 
 
     //モンテカルロシミュレーションで着手
@@ -587,7 +406,7 @@ public:
         std::vector<double> rewards(legalMoves.size(), 0.0);
         for(int i = 0; i < legalMoves.size(); i++) {
             currentSimulate = simulators[i];
-            rewards[i] += run(100, simulators[i]);
+            rewards[i] += run_with_prob(100, simulators[i]);
         }
 
         int index_max = 0;
@@ -706,7 +525,7 @@ public:
             return -1.0;
     }
 
-    double playout(){
+    double playout_withProb(){
         std::vector<Hand> lm;
         std::vector<Hand> enemylm;
         lm.reserve(32);
@@ -756,73 +575,19 @@ public:
         return evaluate();
     }
 
-    double run(const size_t count, Geister root){
+    double run_with_prob(const size_t count, Geister root){
         double result = 0.0;
         std::vector<std::string> legalPattern = getLegalPattern();
 
         for(size_t i = 0; i < count; ++i){
             currentSimulate = root;
             setColor(getRandomPattern(legalPattern));
-            result += playout();
+            result += playout_withProb();
         }
         
         return result;
     }
 
-    #pragma endregion
-
-    int SearchIndex(Geister current, int depthodd){
-        std::vector<float> rewards(32, -INFINITY);
-        Geister MovedGame = current;
-        auto legalMoves = current.getLegalMove1st();
-        legalMoves.reserve(32);
-        for(int l = 0; l < legalMoves.size(); l++){
-            MovedGame = current;
-            for(int d = 0; d < depthodd; d++){
-                if (MovedGame.isEnd()) break;
-                auto mylm = MovedGame.getLegalMove1st();  
-                for(auto&& u: MovedGame.allUnit()){
-                    if(u.color() == UnitColor::unknown)
-                       MovedGame.setColor(u, UnitColor::purple);
-                }
-                if(d == 0 ){
-                    MovedGame.move(legalMoves[l]);
-                } else {  
-                    GetCurrentPi(MovedGame);
-                    MoveIndex = ReturnHand();
-                    MovedGame.move(mylm[MoveIndex]);
-                }
-                MovedGame.printBoard();
-                MovedGame.changeSide(); //相手の手番に変更
-                for(auto&& u: MovedGame.allUnit()){
-                    if(u.color() == UnitColor::unknown)
-                       MovedGame.setColor(u, UnitColor::purple);
-                }     
-                auto enemylm = MovedGame.getLegalMove1st();     
-                GetCurrentPi(MovedGame);
-                MoveIndex = ReturnHand();
-                MovedGame.move(enemylm[MoveIndex]); //相手の着手
-                if (MovedGame.isEnd()) break;
-                MovedGame.changeSide(); //自分の手番に戻す
-            }
-            GetCurrentPi(MovedGame);
-            float reward = 0.0000000;
-            int max_i = 0;
-            auto lmm = MovedGame.getLegalMove1st();
-            printf("prihsize %d, lmmsize %d", pri_h.size(), lmm.size());
-            for(int i = 0; i < pri_h.size(); i++){
-                reward += pri_h[i]*pri_h[i];
-            //auto reward = *std::max_element(pri_h.begin(), pri_h.end());
-            }
-            printf("reward は　%f\n", reward);
-            rewards[l] = reward;
-        }
-
-        std::vector<float>::iterator iter = std::min_element(rewards.begin(), rewards.end());
-        int min_reward_index = std::distance(rewards.begin(), iter);
-        printf("reward%d : %f", i, rewards[min_reward_index]);
-        return min_reward_index;
-    }
     #pragma endregion
 
     //行動確率πの取得
@@ -863,66 +628,25 @@ public:
 
 
         bool isCheckon = false;
-/*         if (moveNum > 50){
-            MaxDepth = 100-moveNum;
-        } else {
-            MaxDepth = 50;
-        } */
         MaxDepth = 50;
+
         //モンテカルロシミュレーションで着手を決定
         MoveIndex = SimulatedHand(isCheckon, game);
-        
-        //モンテカルロが好手を見つけられない場合
-/*         if (isGoodHandFound = false){
-            GetCurrentPi(game);
-            MoveIndex = ReturnHand(); //通常通りポリシーに従って着手
-            //printf("100, Moves:%d\n" ,moveNum);
-        } */
-
-
-        
-        //GetCurrentPi(game);
-        //MoveIndex = ReturnHand();
         
         auto nexthand = legalMoves[MoveIndex];
         return nexthand;
         
-
-        /* currentSimulate = game;
-        //currentSimulate.setColor("", "BCFG");
-        currentSimulate.changeSide();
-        GetCurrentPi(currentSimulate);
-        currentSimulate.printBoard();
-        auto str = currentSimulate.toString();
-        printf("%s\n", str.c_str());
-        auto lmd = currentSimulate.getLegalMove1st();
-        hs_debug(lmd); */
-
-        //theta_debug();
-        //poss_pi_debug(lmd);
-        /* if (moveNum < 10){
-        for(int p = 0; p < poss_pi.size(); p++){
-            printf("%d, %f\n", p, poss_pi[p]);
-        }
-        } */
-
-        
-
         int counter = 0;
 
 
         for(int l = 0; l < legalMoves.size(); l++){
             if (Hand_equal(legalMoves[l], nexthand)){
-                    //printf("今の盤面は\n");
-                    //game.printBoard();
                     lastChoicedHands.push_back(nexthand);
                     for(int h = 0; h < lastChoicedHands.size(); h++){
                         if (Hand_equal(lastChoicedHands[h], nexthand) == true){
                             counter++;
                         }
                     }
-                    //previousBoards.push_back(currentgame,move(nexthand));
-                    //lastChoicedHands.push_back(nexthand); //最後に指した手を記録
                     if (counter < 10) {
                         return nexthand;
                     } else {
@@ -930,76 +654,9 @@ public:
                         MoveIndex = ReturnHand();
                         nexthand = legalMoves[MoveIndex];
                         return nexthand;
-                    }
-                    /*
-                    if(Hand_equal(lastChoicedHand, nexthand)){
-                        nexthand = randomHand(game);
-                        return nexthand;
-                    }*/       
+                    }  
             }
         }
-
-        /*
-        string handa = nexthand.toString();
-        printf("%s\n", handa.c_str());
-        std::vector<int> test = crr_state(game);
-        for(int i = 0; i < test.size(); i++){
-            printf("%d ：　%d \n", i, test[i]);
-        }
-        */
-
-        /*
-        for(int i=0; i < poss_pi.size(); i++){
-                printf("%d: %f\n Move: %d\n",i, poss_pi[i], MoveIndex);
-            }
-        */
-        /*if(poss_pi[0]*(MoveIndex) <= temprand <= poss_pi[0]*(MoveIndex+1)){
-            printf("OK\n");
-        } else {
-            printf("NG\n");
-        }
-        */
-        //printf("Xsize is %d , Ssize is %d", NextX.size(), NextS.size());
-        //DecidePi();
-
-        //if (0 < moveNum < 100){
-            /*DecideNextS(0);
-            std::vector<int> NextT = std::vector<int>(NextS.size());
-            DecideNextX();
-            game.printBoard();
-            write_binary("Player/theta/test.dat", NextS);
-            read_binary("Player/theta/test.dat", NextT);
-            //printf("%d: %d\n",120, NextT[120]);*/
-            //DecidePi();
-            //MoveIndex = DecideIndex();
-            /*for(int i=0; i < poss_pi.size(); i++){
-                printf("%d: %f\n Move: %d\n",i, poss_pi[i], MoveIndex);
-            }
-            if(poss_pi[0]*(MoveIndex) <= temprand <= poss_pi[0]*(MoveIndex+1)){
-                printf("OK\n");
-            } else {
-                printf("NG\n");
-            }
-            DecideNextS(MoveIndex);
-            NextsList.push_back(NextS);*/
-            //return legalMoves[MoveIndex];
-
-
-            /* デバッグ
-            for(int i=0; i  <= takenBlueAlly.size(); i++){
-                printf("%d: %d\n",i, takenBlueAlly[i]);
-            }
-            for(int i=0; i  <= takenRedAlly.size(); i++){
-                printf("%d: %d\n",i, takenRedAlly[i]);
-            }
-            for(int i=0; i  <= takenBlueEnemy.size(); i++){
-                printf("%d: %d\n",i, takenBlueEnemy[i]);
-            }
-            for(int i=0; i  <= takenRedEnemy.size(); i++){
-                printf("%d: %d\n",i, takenRedEnemy[i]);
-            } */
-
-        //}
 
         //以下猪突プレイヤー
         std::vector<Hand> lastHands;
@@ -1039,14 +696,6 @@ public:
             }
         }
         Unit MovingUnit = units[mostFrontIndex];
-    /*    for(const Unit& u: units){
-            if (MovingUnit.x() == u.x() && MovingUnit.y()-1 == u.y()) {
-                    std::uniform_int_distribution<int> serector1(0, legalMoves.size() - 1);
-                    auto action = legalMoves[serector1(mt) % legalMoves.size()];
-                    return action;
-            } 
-        }*/
-
         
         lastHands.push_back(Hand{MovingUnit, Direction::North});
         
@@ -1091,33 +740,5 @@ public:
             printf("%d：%lf: %s\n", i, pri_h[i], lm[i].toString().c_str());
         }
     }
-
-    //行動確率シミュレートのデバッグ
-    /*
-        GetCurrentPi(game);
-        auto lm = game.getLegalMove1st();
-        std::vector<int> Indexes = std::vector<int>(lm.size()) ;
-        MoveIndex = DecideIndex();
-        poss_pi_debug();
-        
-        for(int i = 0; i < Indexes.size(); i++){
-            printf("%d, %d \n", i, Indexes[i]);
-        }
-        game.move(lm[MoveIndex]);
-        game.printBoard();
-    */
-   
-    //チェンジサイドのデバッグ
-    /*
-        currentSimulate = game;
-        currentSimulate.setColor("", "BCFG");
-        currentSimulate.changeSide();
-        GetCurrentPi(currentSimulate);
-        currentSimulate.printBoard();
-        auto str = currentSimulate.toString();
-        printf("%s\n", str.c_str());
-        auto lmd = currentSimulate.getLegalMove1st();
-        poss_pi_debug(lmd);
-    */
 
 };

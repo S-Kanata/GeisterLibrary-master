@@ -3,8 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <iterator>
-
-int i;
+#pragma once
 
 using namespace std;
 
@@ -98,7 +97,7 @@ void Load_CSV_double(std::string filepath, std::vector<double>& vec){
         vec[i] = std::stof(strList[i]);
     }
 
-    //printf("Read Successful!\n");
+    printf("Read Successful!\n");
     return;
 }
 

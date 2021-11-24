@@ -3,8 +3,9 @@
 #include "player.hpp"
 #include "simulator.hpp"
 
+
 #ifndef PLAYOUT_COUNT
-#define PLAYOUT_COUNT 100
+#define PLAYOUT_COUNT 50
 #endif
 
 #define SIMULATOR Simulator

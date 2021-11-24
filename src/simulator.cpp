@@ -2,9 +2,14 @@
 #include "unit.hpp"
 #include "simulator.hpp"
 #include "result.hpp"
+#include "Actionprob.hpp"
+#pragma once
 #include <array>
 #include <algorithm>
 #include <map>
+#ifndef MAXDEPTH
+#define MAXDEPTH 50
+#endif
 
 cpprefjp::random_device Simulator::rd;
 std::mt19937 Simulator::mt(rd());
@@ -126,41 +131,55 @@ double Simulator::playout(){
     return evaluate();
 }
 
-/*
-double Simulator::playout_withpolicy(){
-    static std::uniform_int_distribution<> selector;
-    std::array<Hand, 32> lm;
-    while(true){
-        if(current.isEnd())
+double Simulator::playout_WithProb(){
+    std::vector<Hand> lm;
+    std::vector<Hand> enemylm;
+    lm.reserve(32);
+    enemylm.reserve(32);
+    isMyturn = true;
+    Hand m1, m2;
+    MaxDepth = MAXDEPTH;
+    for(int c = 0; c < MaxDepth; c++){
+        
+        if(root.isEnd()){ //終了判定
+            isMyturn = true;
             break;
+        }
         // 相手の手番
-        // std::vector<Hand> lm2 = current.getLegalMove2nd();
-        // selector.param(std::uniform_int_distribution<>::param_type(0, lm2.size() - 1));
-        current.changeSide();
-        GetCurrentPi(current);
-        MoveIndex = ReturnHand();
-        legalMoves = current.getLegalMove1st();
-        auto nexthand2nd = legalMoves[MoveIndex];
-        current.move(nexthand2nd);
-        if(current.isEnd())
+        root.changeSide();
+        std::vector<double> currentpies = GetCurrentPi(root);
+        int index = DecideIndex(currentpies);
+        enemylm = root.getLegalMove1st();
+        m2 = enemylm[index];
+        if(!CanEscape(root)){
+            m2 = enemylm[index];
+        } else {
+            m2 = EscapeHand(root);
+        } 
+
+        root.move(m2);
+
+        if(root.isEnd()){ //終了判定
+            isMyturn = false;
             break;
+        }
+
         // 自分の手番
-        // std::vector<Hand> lm1 = current.getLegalMove1st();
-        // selector.param(std::uniform_int_distribution<>::param_type(0, lm1.size() - 1));
-        current.changeSide();
-        GetCurrentPi(current);
-        MoveIndex = ReturnHand();
-        legalMoves = current.getLegalMove1st();
-        auto nexthand1st = legalMoves[MoveIndex];
-        current.move(nexthand1st);
+        root.changeSide();
+        currentpies = GetCurrentPi(root);
+
+        int index2 = DecideIndex(currentpies);
+        lm = root.getLegalMove1st();
+        if(!CanEscape(root)){
+            m1 = lm[index2];
+        } else {
+            m1 = EscapeHand(root);
+        } 
+        root.move(m1);
+
     }
-    
-    
     return evaluate();
 }
-*/
-
-
 
 double Simulator::run(const size_t count){
     double result = 0.0;
@@ -172,11 +191,11 @@ double Simulator::run(const size_t count){
         // setColorRandom();
         result += playout();
     }
-    return result;
+        return result;
 }
 
-/*
-double Simulator::run_withpolicy(const size_t count){
+double Simulator::run_WithPlob(const size_t count){
+    settheta();
     double result = 0.0;
     for(size_t i = 0; i < count; ++i){
         current = root;
@@ -184,11 +203,11 @@ double Simulator::run_withpolicy(const size_t count){
         // current.printBoard();
         // std::cout << current.result() << "\n";
         // setColorRandom();
-        result += playout_withpolicy();
+        result += playout_WithProb();
     }
-    return result;
+        return result;
 }
-*/
+
 
 double Simulator::run(std::string_view ptn, const size_t count){
     double result = 0.0;
@@ -199,3 +218,16 @@ double Simulator::run(std::string_view ptn, const size_t count){
     }
     return result;
 }
+
+double Simulator::run_WithPlob(std::string_view ptn, const size_t count){
+    double result = 0.0;
+    for(size_t i = 0; i < count; ++i){
+        current = root;
+        setColor(ptn);
+        result += playout_WithProb();
+    }
+    return result;
+}
+
+
+

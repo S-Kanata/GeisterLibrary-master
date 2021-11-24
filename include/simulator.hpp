@@ -6,6 +6,7 @@
 #include "random.hpp"
 #include "result.hpp"
 #include <string_view>
+#pragma once
 
 class Simulator{
 protected:
@@ -30,15 +31,18 @@ public:
     virtual void setColorRandom();
 
     virtual double playout();
-    //virtual double playout_withpolicy();
+    virtual double playout_WithProb();
+
+
     
     virtual double run(const size_t count = 1);
 
-    //virtual double run_withpolicy(const size_t count = 1);
+    virtual double run_WithPlob(const size_t count = 1);
 
-    //virtual double run_withpolicy(std::string_view, const size_t count = 1);
+    virtual double run_WithPlob(std::string_view, const size_t count = 1);
 
     virtual double run(std::string_view, const size_t count = 1);
+
 
     virtual double evaluate() const
     {

@@ -95,7 +95,8 @@
         "semaphore": "cpp",
         "stop_token": "cpp",
         "cfenv": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "xstring": "cpp"
     },
     "git.ignoreLimitWarning": true
 }

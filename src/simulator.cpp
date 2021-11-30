@@ -134,48 +134,38 @@ double Simulator::playout(){
 double Simulator::playout_WithProb(){
     std::vector<Hand> lm;
     std::vector<Hand> enemylm;
+    std::vector<double> currentpies;
+    currentpies.reserve(32);
     lm.reserve(32);
     enemylm.reserve(32);
-    isMyturn = true;
     Hand m1, m2;
     MaxDepth = MAXDEPTH;
     for(int c = 0; c < MaxDepth; c++){
         
-        if(root.isEnd()){ //終了判定
-            isMyturn = true;
+        if(current.isEnd()){ //終了判定
             break;
         }
         // 相手の手番
-        root.changeSide();
-        std::vector<double> currentpies = GetCurrentPi(root);
+        current.changeSide();
+        currentpies = GetCurrentPi(current);
         int index = DecideIndex(currentpies);
-        enemylm = root.getLegalMove1st();
+        enemylm = current.getLegalMove1st();
         m2 = enemylm[index];
-        if(!CanEscape(root)){
-            m2 = enemylm[index];
-        } else {
-            m2 = EscapeHand(root);
-        } 
 
-        root.move(m2);
-
-        if(root.isEnd()){ //終了判定
-            isMyturn = false;
-            break;
-        }
+        current.move(m2);
 
         // 自分の手番
-        root.changeSide();
-        currentpies = GetCurrentPi(root);
+        current.changeSide();
+        if(current.isEnd()){ //終了判定
+            break;
+        }
+        currentpies = GetCurrentPi(current);
 
         int index2 = DecideIndex(currentpies);
-        lm = root.getLegalMove1st();
-        if(!CanEscape(root)){
-            m1 = lm[index2];
-        } else {
-            m1 = EscapeHand(root);
-        } 
-        root.move(m1);
+        lm = current.getLegalMove1st();
+        m1 = lm[index2];
+
+        current.move(m1);
 
     }
     return evaluate();
@@ -200,9 +190,6 @@ double Simulator::run_WithPlob(const size_t count){
     for(size_t i = 0; i < count; ++i){
         current = root;
         setColor(getRandomPattern());
-        // current.printBoard();
-        // std::cout << current.result() << "\n";
-        // setColorRandom();
         result += playout_WithProb();
     }
         return result;

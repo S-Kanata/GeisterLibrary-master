@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 
-constexpr int expandCount = 5;//PLAYOUT_COUNT * 0.1;
+constexpr int expandCount = 100;//PLAYOUT_COUNT * 0.1;
 
 #ifndef SIMULATOR
 #define SIMULATOR Simulator0
@@ -51,10 +51,11 @@ public:
 
     double select(){
         visitCount++;
-        if(auto res = static_cast<int>(root.result()); res != 0){
+        auto result = static_cast<int>(root.result());
+        if(result != 0){
             totalCount++;
-            reward += res;
-            return -res;
+            reward += result;
+            return -result;
         }
         double res;
         if(!children.empty()){
@@ -97,7 +98,7 @@ public:
 int MCTNode::totalCount = 0;
 
 #ifndef PLAYOUT_COUNT
-#define PLAYOUT_COUNT 10
+#define PLAYOUT_COUNT 1000
 #endif
 
 class MCTSPlayer: public Player{
@@ -180,7 +181,9 @@ protected:
                 tree.children.push_back(child);
             }
             for(int i = 0; i < playoutCount; ++i){
+                
                 tree.select();
+            
             }
         }
 
@@ -193,7 +196,8 @@ protected:
         int index = 0;
         double maxVisit = visits[0];
         for(int i = 1; i < visits.size(); ++i){
-            if(double visit = visits[i]; visit > maxVisit){
+            double visit = visits[i];
+            if( visit > maxVisit){
                 maxVisit = visit;
                 index = i;
             }
@@ -297,7 +301,8 @@ protected:
             visits[i] = trees[0].children[i].visitCount;
             // rewards[i] = trees[0].children[i].reward;
             for(int t = 1; t < trees.size(); ++t){
-                if(auto visit = trees[t].children[i].visitCount; visit < visits[i]){
+                auto visit = trees[t].children[i].visitCount;
+                if( visit < visits[i]){
                     visits[i] = visit;
                 }
                 // if(auto reward = trees[t].children[i].reward; reward < rewards[i]){
@@ -336,7 +341,11 @@ protected:
                 child.root.move(lm);
                 tree.children.push_back(child);
             }
-            for(int i = 0; i < playoutCount; ++i){
+            while(MCTNode::totalCount < playoutCount){
+                if(MCTNode::totalCount%100 == 0) {
+                    printf("%d\n",MCTNode::totalCount);
+                    fflush(stdout);
+                }
                 tree.select();
             }
         }
@@ -350,13 +359,23 @@ protected:
         int index = 0;
         double maxVisit = visits[0];
         for(int i = 1; i < visits.size(); ++i){
-            if(double visit = visits[i]; visit > maxVisit){
+            double visit = visits[i];
+            if( visit > maxVisit){
                 maxVisit = visit;
                 index = i;
             }
         }
 
+        auto lm = game.getLegalMove1st();
+        for(int i = 0; i < lm.size(); i++){
+            auto moved = game;
+            moved.move(lm[i]);
+            moved.printBoard();
+            printf("%lf:%lf\n", visits[i],i );
+        }
 
-        return game.getLegalMove1st()[index];
+        fflush(stdout);
+
+        return lm[index];
     }
 };

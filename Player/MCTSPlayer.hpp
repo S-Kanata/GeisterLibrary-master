@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 
-constexpr int expandCount = 100;//PLAYOUT_COUNT * 0.1;
+constexpr int expandCount = 250;//PLAYOUT_COUNT * 0.1;
 
 #ifndef SIMULATOR
 #define SIMULATOR Simulator0
@@ -33,7 +33,7 @@ public:
     }
 
     double calcUCB(){
-        constexpr double alpha = 1.5;
+        constexpr double alpha = 0.5;
         return (reward / std::max(visitCount, 1))
             + (alpha * sqrt(log((double)totalCount) / std::max(visitCount, 1)));
     }
@@ -326,6 +326,20 @@ protected:
     }
 
     std::string decideHand_Vote(){
+
+        //脱出可能な手があれば脱出
+        const std::array<Unit, 16>& units = game.allUnit();
+        for(const Unit& u: units){
+            if(u.color() == UnitColor::Blue){
+                if(u.x() == 0 && u.y() == 0){
+                    return Hand{u, Direction::West};
+                }
+                if(u.x() == 5 && u.y() == 0){
+                    return Hand{u, Direction::East};
+                }
+            }
+        }
+
         // 合法手の列挙
         MCTNode::totalCount = 0;
         auto legalPattern = getLegalPattern(game);
@@ -342,7 +356,7 @@ protected:
                 tree.children.push_back(child);
             }
             while(MCTNode::totalCount < playoutCount){
-                if(MCTNode::totalCount%100 == 0) {
+                if(MCTNode::totalCount%100 == 0 && MCTNode::totalCount != 0) {
                     printf("%d\n",MCTNode::totalCount);
                     fflush(stdout);
                 }
@@ -358,7 +372,7 @@ protected:
         }
         int index = 0;
         double maxVisit = visits[0];
-        for(int i = 1; i < visits.size(); ++i){
+        for(int i = 0; i < visits.size(); i++){
             double visit = visits[i];
             if( visit > maxVisit){
                 maxVisit = visit;
@@ -366,14 +380,20 @@ protected:
             }
         }
 
-        auto lm = game.getLegalMove1st();
+        /*
+        
         for(int i = 0; i < lm.size(); i++){
             auto moved = game;
             moved.move(lm[i]);
             moved.printBoard();
             printf("%lf:%lf\n", visits[i],i );
         }
+        */
+       auto lm = game.getLegalMove1st();
 
+        auto copy = game;
+        copy.move(lm[index]);
+        copy.printBoard();
         fflush(stdout);
 
         return lm[index];

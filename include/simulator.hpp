@@ -48,6 +48,20 @@ public:
     {
         return current.result() == Result::Draw ? 0 : static_cast<int>(current.result()) > 0 ? 1.0 : -1.0;
     }
+
+    virtual double evaluate_forProb(bool isMyturn) const
+    {
+        auto evalboard = current;
+        if(!isMyturn) evalboard.changeSide();
+        if (evalboard.result() == Result::OnPlay || evalboard.result() == Result::Draw) 
+            return 0;
+        if (static_cast<int>(evalboard.result()) > 0)         
+            return 1.0;
+        if (static_cast<int>(evalboard.result()) < 0)
+            return -1.0;
+    }
+        
+
 };
 
 #endif

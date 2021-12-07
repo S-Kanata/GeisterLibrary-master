@@ -140,9 +140,12 @@ double Simulator::playout_WithProb(){
     enemylm.reserve(32);
     Hand m1, m2;
     MaxDepth = MAXDEPTH;
+    isMyturn = false;
+
     for(int c = 0; c < MaxDepth; c++){
         
         if(current.isEnd()){ //終了判定
+            isMyturn = true;
             break;
         }
         // 相手の手番
@@ -150,25 +153,40 @@ double Simulator::playout_WithProb(){
         currentpies = GetCurrentPi(current);
         int index = DecideIndex(currentpies);
         enemylm = current.getLegalMove1st();
-        m2 = enemylm[index];
 
-        current.move(m2);
+        if(!CanEscape(current))
+        {
+            m1 = enemylm[index];
+        } else {
+            m1 = EscapeHand(current);
+        } 
+
+        current.move(m1);
+
+        if(current.isEnd()){ //終了判定
+            isMyturn = false;
+            break;
+        }
 
         // 自分の手番
         current.changeSide();
-        if(current.isEnd()){ //終了判定
-            break;
-        }
         currentpies = GetCurrentPi(current);
 
         int index2 = DecideIndex(currentpies);
         lm = current.getLegalMove1st();
-        m1 = lm[index2];
+        
+        if(!CanEscape(current))
+        {
+            m2 = lm[index2];
+        } else {
+            m2 = EscapeHand(current);
+        } 
+        m2 = lm[index2];
 
-        current.move(m1);
+        current.move(m2);
 
     }
-    return evaluate();
+    return evaluate_forProb(isMyturn);
 }
 
 double Simulator::run(const size_t count){

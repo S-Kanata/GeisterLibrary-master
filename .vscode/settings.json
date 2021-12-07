@@ -96,7 +96,8 @@
         "stop_token": "cpp",
         "cfenv": "cpp",
         "cinttypes": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "*.ipp": "cpp"
     },
     "git.ignoreLimitWarning": true
 }

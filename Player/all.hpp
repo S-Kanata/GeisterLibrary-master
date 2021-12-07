@@ -6,3 +6,4 @@
 //#include "Reinforce.hpp"
 //#include "MCTS_withProb.hpp"
 #include "MCTSPlayer.hpp"
+#include "MCTSOrigin.hpp"

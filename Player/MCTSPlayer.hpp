@@ -44,6 +44,11 @@ public:
         for(auto&& lm: legalMoves){
             auto child = *this;
             child.root.move(lm);
+            child.root.changeSide();
+            auto LMs = child.root.getLegalMove1st();
+            for(auto&& LM: LMs){
+                child.root.move(LM);
+            }
             children.push_back(child);
         }
         root.changeSide();
@@ -58,6 +63,13 @@ public:
             return -result;
         }
         double res;
+
+        // 訪問回数が規定数を超えていたら子ノードをたどる
+        if(visitCount > expandCount){
+            // root.printBoard();
+            // 子ノードがなければ展開
+            expand();
+        }
         if(!children.empty()){
             std::vector<double> ucbs(children.size());
             std::transform(children.begin(), children.end(), ucbs.begin(), [](auto& x){return x.calcUCB();});
@@ -77,15 +89,7 @@ public:
             // // std::cout << "\n";
             // res = children[childIndex].select();
         }
-        // 訪問回数が規定数を超えていたら子ノードをたどる
-        else if(visitCount > expandCount){
-            // root.printBoard();
-            // 子ノードがなければ展開
-            expand();
-            for(auto&& child: children){
-                res = child.select();
-            }
-        }
+ 
         // プレイアウトの実行
         else{
             totalCount++;

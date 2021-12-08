@@ -140,7 +140,7 @@ double Simulator::playout_WithProb(){
     enemylm.reserve(32);
     Hand m1, m2;
     MaxDepth = MAXDEPTH;
-    isMyturn = false;
+    isMyturn = true;
 
     for(int c = 0; c < MaxDepth; c++){
         

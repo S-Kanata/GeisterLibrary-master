@@ -48,8 +48,9 @@ public:
             auto LMs = child.root.getLegalMove1st();
             for(auto&& LM: LMs){
                 child.root.move(LM);
+                children.push_back(child);
             }
-            children.push_back(child);
+            
         }
         root.changeSide();
     }

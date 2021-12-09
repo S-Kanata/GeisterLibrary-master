@@ -341,14 +341,18 @@ protected:
         }
 
         // 合法手の列挙
-        MCTNode::totalCount = 0;
+        
         auto legalPattern = getLegalPattern(game);
         std::vector<MCTNode> trees;
         for(auto&& p: legalPattern){
             trees.push_back(MCTNode(game, p));
         }
 
+        MCTNode::totalCount = 0;
+
+        
         for(auto&& tree:trees){
+            
             auto legalMoves = tree.root.getLegalMove1st();
             for(auto&& lm: legalMoves){
                 auto child = tree;

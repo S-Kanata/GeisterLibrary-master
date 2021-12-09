@@ -44,6 +44,7 @@ public:
         for(auto&& lm: legalMoves){
             auto child = *this;
             child.root.move(lm);
+            child.root.changeSide();
             children.push_back(child);
         }
         root.changeSide();
@@ -78,9 +79,11 @@ public:
             // res = children[childIndex].select();
         }
         // 訪問回数が規定数を超えていたら子ノードをたどる
-        else if(visitCount > expandCount){
+        else if(visitCount == expandCount){
             // root.printBoard();
             // 子ノードがなければ展開
+            printf("expand");
+            fflush(stdout);
             expand();
             for(auto&& child: children){
                 res = child.select();
@@ -121,7 +124,7 @@ public:
     virtual std::string decideHand(std::string_view res){
         game = Geister(res);
         MCTNode::totalCount = 0;
-        return decideHand_Vote();
+        return decideHand_Random();
     }
 
 protected:
@@ -168,11 +171,24 @@ protected:
     std::string decideHand_Random(){
         // 合法手の列挙
         auto legalPattern = getLegalPattern(game);
-        std::vector<MCTNode> trees;
-        for(auto&& p: legalPattern){
-            trees.push_back(MCTNode(game, p));
+        MCTNode Tree(game);
+        auto legalMoves = Tree.root.getLegalMove1st();
+        for(auto&& lm: legalMoves){
+                auto child = Tree;
+                child.root.move(lm);
+                Tree.children.push_back(child);
+        }
+        
+        for(int i = 0; i < playoutCount; ++i){        
+                Tree.select();
+                if(i%100 == 0){
+                    printf("%d¥n", i);
+                    fflush(stdout);
+                }
         }
 
+
+        /*
         for(auto&& tree:trees){
             auto legalMoves = tree.root.getLegalMove1st();
             for(auto&& lm: legalMoves){
@@ -186,16 +202,15 @@ protected:
             
             }
         }
-
-        std::vector<double> visits(game.getLegalMove1st().size());
-        for(auto&& tree:trees){
-            for(int i = 0; i < tree.children.size(); ++i){
-                visits[i] += tree.children[i].visitCount;
-            }
+        */
+        auto lm = game.getLegalMove1st();
+        std::vector<double> visits(lm.size());
+        for(int i = 0; i < lm.size(); ++i){
+                visits[i] += Tree.children[i].visitCount;
         }
         int index = 0;
         double maxVisit = visits[0];
-        for(int i = 1; i < visits.size(); ++i){
+        for(int i = 0; i < visits.size(); i++){
             double visit = visits[i];
             if( visit > maxVisit){
                 maxVisit = visit;
@@ -203,7 +218,14 @@ protected:
             }
         }
 
-        return game.getLegalMove1st()[index];
+        
+        auto copy = game;
+        copy.move(lm[index]);
+        copy.printBoard();
+        fflush(stdout);
+
+
+        return lm[index];
     }
 
     std::string decideHand_Average(){

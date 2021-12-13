@@ -40,6 +40,7 @@ public:
 
     void expand(){
         root.changeSide();
+        root.printBoard();
         auto legalMoves = root.getLegalMove1st();
         for(auto&& lm: legalMoves){
             auto child = *this;
@@ -64,7 +65,21 @@ public:
             std::transform(children.begin(), children.end(), ucbs.begin(), [](auto& x){return x.calcUCB();});
             auto&& max_iter = std::max_element(ucbs.begin(), ucbs.end());
             int index = std::distance(ucbs.begin(), max_iter);
+            /*
+            std::vector<int> indexes;
+            for(int i = 0; i < ucbs.size(); i++){
+                if(ucbs[index]==ucbs[i]){
+                    
+                    indexes.push_back(i);
+                }
+            }
+            if(indexes.size() > 1){
+                std::uniform_int_distribution<int> serector(0, indexes.size() - 1);
+                res = children[serector(mt)].select();
+            } else {
+                */
             res = children[index].select();
+            
 
             // int childIndex = 0;
             // double maxUCB = children[0].calcUCB();
@@ -79,14 +94,16 @@ public:
             // res = children[childIndex].select();
         }
         // 訪問回数が規定数を超えていたら子ノードをたどる
-        else if(visitCount == expandCount){
+        else if(visitCount >= expandCount){
             // root.printBoard();
             // 子ノードがなければ展開
-            printf("expand");
-            fflush(stdout);
-            expand();
+            if(visitCount == expandCount){
+                printf("expand");
+                fflush(stdout);
+                expand();
+            }
             for(auto&& child: children){
-                res = child.select();
+            res += -child.select();
             }
         }
         // プレイアウトの実行

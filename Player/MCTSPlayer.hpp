@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 
-constexpr int expandCount = 250;//PLAYOUT_COUNT * 0.1;
+constexpr int expandCount = 100;//PLAYOUT_COUNT * 0.1;
 
 #ifndef SIMULATOR
 #define SIMULATOR Simulator0

@@ -5,7 +5,7 @@
 
 
 #ifndef PLAYOUT_COUNT
-#define PLAYOUT_COUNT 50
+#define PLAYOUT_COUNT 100
 #endif
 
 #define SIMULATOR Simulator
@@ -44,26 +44,24 @@ public:
         }
         
         SIMULATOR s0(game);
-        auto patterns = s0.getLegalPattern();
-        const int playout = std::max(static_cast<int>(PLAYOUT_COUNT / patterns.size()), 1);
         std::vector<double> rewards(legalMoves.size(), 0.0);
         
         for(int l = 0; l < legalMoves.size(); ++l){
             auto m = legalMoves[l];
             SIMULATOR s(game);
             s.root.move(m);
-            for(auto&& pattern: patterns){
-                rewards[l] += s.run(pattern, playout);
-            }
+            rewards[l] += s.run_WithPlob(100);
         }
 
         auto&& max_iter = std::max_element(rewards.begin(), rewards.end());
         int index = std::distance(rewards.begin(), max_iter);
         return legalMoves[index];
-        
+
+        /*
         std::uniform_int_distribution<int> serector1(0, legalMoves.size() - 1);
         auto action = legalMoves[serector1(mt) % legalMoves.size()];
         return action;
+        */
     }
 
     virtual std::vector<Hand> candidateHand(){

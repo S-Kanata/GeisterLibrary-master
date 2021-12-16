@@ -33,7 +33,7 @@ public:
     }
 
     double calcUCB(){
-        constexpr double alpha = 0.5;
+        constexpr double alpha = 0.75;
         return (reward / std::max(visitCount, 1))
             + (alpha * sqrt(log((double)totalCount) / std::max(visitCount, 1)));
     }

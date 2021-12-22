@@ -7,6 +7,7 @@
 #include <iostream>
 
 constexpr int expandCount = 250;//PLAYOUT_COUNT * 0.1;
+constexpr double alpha = 1.25;
 
 #ifndef SIMULATOR
 #define SIMULATOR Simulator0
@@ -33,7 +34,6 @@ public:
     }
 
     double calcUCB(){
-        constexpr double alpha = 0.75;
         return (reward / std::max(visitCount, 1))
             + (alpha * sqrt(log((double)totalCount) / std::max(visitCount, 1)));
     }
@@ -133,7 +133,9 @@ public:
 
     virtual std::string decideRed(){
         int pc = PLAYOUT_COUNT;
-        printf("%d", pc);
+        printf("%d\n", pc);
+        printf("%lf\n", alpha);
+        fflush(stdout);
         std::uniform_int_distribution<int> serector(0, pattern.size() - 1);
         return pattern[serector(mt)];
     }

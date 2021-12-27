@@ -188,6 +188,19 @@ protected:
     }
 
     std::string decideHand_Random(){
+        
+        const std::array<Unit, 16>& units = game.allUnit();
+        for(const Unit& u: units){
+            if(u.color() == UnitColor::Blue){
+                if(u.x() == 0 && u.y() == 0){
+                    return Hand{u, Direction::West};
+                }
+                if(u.x() == 5 && u.y() == 0){
+                    return Hand{u, Direction::East};
+                }
+            }
+        }
+
         // 合法手の列挙
         auto legalPattern = getLegalPattern(game);
         MCTNode Tree(game);

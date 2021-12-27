@@ -7,7 +7,7 @@
 #include <iostream>
 
 constexpr int expandCount = 250;//PLAYOUT_COUNT * 0.1;
-constexpr double alpha = 1.25;
+constexpr double alpha = 1.4;
 
 #ifndef SIMULATOR
 #define SIMULATOR Simulator0
@@ -141,6 +141,8 @@ public:
     }
 
     virtual std::string decideHand(std::string_view res){
+        printf("%s\n", res);
+        fflush(stdout);
         game = Geister(res);
         MCTNode::totalCount = 0;
         return decideHand_Random();

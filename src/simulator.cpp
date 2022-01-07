@@ -141,6 +141,7 @@ double Simulator::playout_WithProb(){
     Hand m1, m2;
     MaxDepth = MAXDEPTH;
     isMyturn = true;
+    int canEscape = 0;
 
     for(int c = 0; c < MaxDepth; c++){
         
@@ -154,11 +155,11 @@ double Simulator::playout_WithProb(){
         int index = DecideIndex(currentpies);
         enemylm = current.getLegalMove1st();
 
-        if(!CanEscape(current))
-        {
-            m1 = enemylm[index];
-        } else {
-            m1 = EscapeHand(current);
+        canEscape = CanEscape(current);
+
+        m1 = enemylm[index];
+        if(canEscape > 0) {
+            m1 = EscapeHand(current, canEscape);
         } 
 
         current.move(m1);
@@ -174,14 +175,14 @@ double Simulator::playout_WithProb(){
 
         int index2 = DecideIndex(currentpies);
         lm = current.getLegalMove1st();
+
+        canEscape = CanEscape(current);
         
-        if(!CanEscape(current))
-        {
-            m2 = lm[index2];
-        } else {
-            m2 = EscapeHand(current);
-        } 
         m2 = lm[index2];
+        if(canEscape > 0){
+            m2 = EscapeHand(current, canEscape);
+        } 
+
 
         current.move(m2);
 

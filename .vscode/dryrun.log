@@ -1,4 +1,4 @@
-make -f "/Users/kanata/Desktop/GeisterLibrary-master/makefile" --dry-run --always-make --keep-going --print-directory
+make -f /Users/kanata/Desktop/GeisterLibrary-master/makefile --dry-run --always-make --keep-going --print-directory
 sed: 1: "src/player.cpp": unterminated substitute in regular expression
  
 make: Entering directory `/Users/kanata/Desktop/GeisterLibrary-master'

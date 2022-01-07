@@ -54,23 +54,62 @@ double evaluate() {
 }
 
 //脱出可能かどうかチェック
-bool CanEscape(Geister currentGame){
+int CanEscape(Geister currentGame){
     auto legalMoves = currentGame.getLegalMove1st();
-    for( auto move : legalMoves) {
-        Unit u = move.unit;
-        if(u.isBlue() && (u.x() == 0 && u.y() == 0) ) { return true; }
-        if(u.isBlue() && (u.x() == 5 && u.y() == 0) ) { return true; }
+    
+    //出口との距離が0の場合
+    if (currentGame.IsExistUnit(0, 0) == 1){
+        return 1;
     }
-    return false;
+    if (currentGame.IsExistUnit(5, 0) == 1){
+        return 1;
+    }
+
+    //出口との距離が1の場合
+    if (currentGame.IsExistUnit(5, 5) != 3 && currentGame.IsExistUnit(0, 5) != 3){
+        if (!(currentGame.IsExistUnit(0, 0) == 3 && currentGame.takenCount(UnitColor::Red) == 3)){
+            if (currentGame.IsExistUnit(0, 1) == 1 && currentGame.IsExistUnit(1, 0) == 0){
+                return 3;
+            }
+            if (currentGame.IsExistUnit(1, 0) == 1 && currentGame.IsExistUnit(0, 1) == 0){
+                return 3;
+            }
+        }
+
+        if (!(currentGame.IsExistUnit(5, 0) == 3 && currentGame.takenCount(UnitColor::Red) == 3)){
+            if (currentGame.IsExistUnit(5, 1) == 1 && currentGame.IsExistUnit(4, 0) == 0){
+                    return 3;
+            }
+            if (currentGame.IsExistUnit(4, 0) == 1 && currentGame.IsExistUnit(5, 1) == 0){
+                    return 3;
+            }
+        }
+    }
+    return 0;
 }
 
-Hand EscapeHand(Geister currentGame){
+Hand EscapeHand(Geister currentGame, int depth){
     auto legalMoves = currentGame.getLegalMove1st();
-    for( auto move : legalMoves) {
-        Unit u = move.unit;
-        if(u.isBlue() && (u.x() == 0 && u.y() == 0) ) { return Hand{u, 'W'}; }
-        if(u.isBlue() && (u.x() == 5 && u.y() == 0) ) { return Hand{u, 'E'}; }
+    if(depth == 1){
+        for( auto move : legalMoves) {
+            Unit u = move.unit;
+            if(u.isBlue() && (u.x() == 0 && u.y() == 0) ) { return Hand{u, 'W'}; }
+            if(u.isBlue() && (u.x() == 5 && u.y() == 0) ) { return Hand{u, 'E'}; }
+        }
     }
+
+    if(depth == 3){
+        for( auto move : legalMoves) {
+            Unit u = move.unit;
+            if(u.isBlue() && (u.x() == 0 && u.y() == 1) ) { return Hand{u, 'N'}; }
+            if(u.isBlue() && (u.x() == 1 && u.y() == 0) ) { return Hand{u, 'W'}; }
+            if(u.isBlue() && (u.x() == 5 && u.y() == 1) ) { return Hand{u, 'N'}; }
+            if(u.isBlue() && (u.x() == 4 && u.y() == 0) ) { return Hand{u, 'E'}; }
+        }
+    }
+
+
+
 }
 std::vector<int> crrstate(Geister MovedGame, Geister copiedGame){
     std::vector<std::vector<int>> crr_state (3, std::vector<int> (42));

@@ -499,3 +499,18 @@ void Geister::changeSide(){
     if(mResult != Result::Draw)
         mResult = static_cast<Result>(-static_cast<int>(mResult));
 }
+
+int Geister::IsExistUnit(int x, int y){
+    for(int i = 0; i < 16; i++){
+        if (units[i].x()== x && units[i].y()){
+            if(units[i].color() == UnitColor::Blue){
+                return 1;
+            } else if(units[i].color() == UnitColor::Red){
+                return 2;
+            } else {
+            return 3;
+            }
+        }
+    }
+    return 0;
+}

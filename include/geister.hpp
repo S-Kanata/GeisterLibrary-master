@@ -84,6 +84,9 @@ public:
     void changeSide();
 
     int takenCount(const UnitColor& c) const noexcept;
+
+
+    int IsExistUnit(int x, int y);
 };
 
 inline std::ostream& operator<<(std::ostream& stream, const Geister& value){
@@ -94,6 +97,7 @@ static bool Board_equal(struct Hand a, struct Hand b) {
     return  a.direct == b.direct &&
             a.unit == b.unit;
 }
+
 
 #include "impl/geister.hpp"
 

@@ -111,6 +111,7 @@ Hand EscapeHand(Geister currentGame, int depth){
 
 
 }
+
 std::vector<int> crrstate(Geister MovedGame, Geister copiedGame){
     std::vector<std::vector<int>> crr_state (3, std::vector<int> (42));
     std::vector<int> side_list{0, 0, 0, 0, 0, 0};

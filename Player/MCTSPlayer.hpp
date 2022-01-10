@@ -130,9 +130,11 @@ public:
     }
 
     std::vector<double> theta;   //行動パラメータθ
+    std::vector<int> EnemyColor; //敵駒色の推定
 
     virtual std::string decideRed(){
         int pc = PLAYOUT_COUNT;
+        EnemyColor.reserve(20);
         printf("%d\n", pc);
         printf("%lf\n", alpha);
         fflush(stdout);
@@ -191,17 +193,15 @@ protected:
 
     std::string decideHand_Random(){
         
-        const std::array<Unit, 16>& units = game.allUnit();
-        for(const Unit& u: units){
-            if(u.color() == UnitColor::Blue){
-                if(u.x() == 0 && u.y() == 0){
-                    return Hand{u, Direction::West};
-                }
-                if(u.x() == 5 && u.y() == 0){
-                    return Hand{u, Direction::East};
-                }
-            }
+        //脱出可能な手があれば脱出
+        int canescape = CheckCanEscape(game);
+        if(canescape > 0){
+            Hand escapehand = Escape(game, canescape);
+            printf("必勝手が存在\n");
+            fflush(stdout);
+            return escapehand;
         }
+
 
         // 合法手の列挙
         auto legalPattern = getLegalPattern(game);
@@ -383,21 +383,7 @@ protected:
 
     std::string decideHand_Vote(){
 
-        //脱出可能な手があれば脱出
-        const std::array<Unit, 16>& units = game.allUnit();
-        for(const Unit& u: units){
-            if(u.color() == UnitColor::Blue){
-                if(u.x() == 0 && u.y() == 0){
-                    return Hand{u, Direction::West};
-                }
-                if(u.x() == 5 && u.y() == 0){
-                    return Hand{u, Direction::East};
-                }
-            }
-        }
-
         // 合法手の列挙
-        
         auto legalPattern = getLegalPattern(game);
         std::vector<MCTNode> trees;
         for(auto&& p: legalPattern){
@@ -440,15 +426,6 @@ protected:
             }
         }
 
-        /*
-        
-        for(int i = 0; i < lm.size(); i++){
-            auto moved = game;
-            moved.move(lm[i]);
-            moved.printBoard();
-            printf("%lf:%lf\n", visits[i],i );
-        }
-        */
        auto lm = game.getLegalMove1st();
 
         auto copy = game;
@@ -457,5 +434,67 @@ protected:
         fflush(stdout);
 
         return lm[index];
+    }
+
+    //脱出可能かどうかチェック
+    int CheckCanEscape(Geister currentGame){
+        auto legalMoves = currentGame.getLegalMove1st();
+        printf("必勝手を検索中...\n");
+        //出口との距離が0の場合
+        if (currentGame.IsExistUnit(0, 0) == 1){
+            printf("脱出可能なコマがあります\n");
+            return 1;
+        }
+        if (currentGame.IsExistUnit(5, 0) == 1){
+            printf("脱出可能なコマがあります\n");
+            return 1;
+        }
+
+        //出口との距離が1の場合
+        if (currentGame.IsExistUnit(5, 5) != 3 && currentGame.IsExistUnit(0, 5) != 3){
+            if (!(currentGame.IsExistUnit(0, 0) == 3 && currentGame.takenCount(UnitColor::Red) == 3)){
+                if (currentGame.IsExistUnit(0, 1) == 1 && currentGame.IsExistUnit(1, 0) == 0){
+                    return 3;
+                }
+                if (currentGame.IsExistUnit(1, 0) == 1 && currentGame.IsExistUnit(0, 1) == 0){
+                    return 3;
+                }
+            }
+
+            if (!(currentGame.IsExistUnit(5, 0) == 3 && currentGame.takenCount(UnitColor::Red) == 3)){
+                if (currentGame.IsExistUnit(5, 1) == 1 && currentGame.IsExistUnit(4, 0) == 0){
+                        return 3;
+                }
+                if (currentGame.IsExistUnit(4, 0) == 1 && currentGame.IsExistUnit(5, 1) == 0){
+                        return 3;
+                }
+            }
+        }
+        return 0;
+    }
+
+    Hand Escape(Geister currentGame, int depth){
+        auto legalMoves = currentGame.getLegalMove1st();
+
+        if(depth == 1){
+            for( auto move : legalMoves) {
+                Unit u = move.unit;
+                if(u.isBlue() && (u.x() == 0 && u.y() == 0) ) { return Hand{u, 'W'}; }
+                if(u.isBlue() && (u.x() == 5 && u.y() == 0) ) { return Hand{u, 'E'}; }
+            }
+        }
+
+        if(depth == 3){
+            for( auto move : legalMoves) {
+                Unit u = move.unit;
+                if(u.isBlue() && (u.x() == 0 && u.y() == 1) ) { return Hand{u, 'N'}; }
+                if(u.isBlue() && (u.x() == 1 && u.y() == 0) ) { return Hand{u, 'W'}; }
+                if(u.isBlue() && (u.x() == 5 && u.y() == 1) ) { return Hand{u, 'N'}; }
+                if(u.isBlue() && (u.x() == 4 && u.y() == 0) ) { return Hand{u, 'E'}; }
+            }
+        }
+
+
+
     }
 };

@@ -22,9 +22,9 @@ public:
     virtual std::string decideHand(std::string_view res){
         game.setState(res);
         Hand hand;
-        canEscape = CanEscape(game);
-        if(canEscape > 0)
-            return EscapeHand(current, canEscape);
+        auto canEscape = CanEscape(game);
+        if(canEscape > 0){
+            return EscapeHand(game, canEscape);
         } 
 
         auto legalMoves = candidateHand();

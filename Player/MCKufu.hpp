@@ -153,7 +153,7 @@ public:
             auto m = legalMoves[l];
             SIMULATOR s(game);
             s.root.move(m);
-            rewards[l] += s.run_WithPlob(10);
+            rewards[l] += s.run_WithPlob(100);
         }
 
         auto&& max_iter = std::max_element(rewards.begin(), rewards.end());

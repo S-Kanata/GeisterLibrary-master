@@ -92,7 +92,6 @@ public:
         enemyboard.move(legalMoves[index]);
         fflush(stdout);
         enemyboard.changeSide();
-        
 
         for(int i = 0; i < 16; i++){
             if(enemyboard.IsExistUnit(0,0) == 3){

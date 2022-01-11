@@ -106,7 +106,7 @@ class MCTSOrigin: public Player{
     cpprefjp::random_device rd;
     std::mt19937 mt;
 public:
-    MCTSPlayer(): mt(rd()){
+    MCTSOrigin(): mt(rd()){
     }
 
     std::vector<double> theta;   //行動パラメータθ

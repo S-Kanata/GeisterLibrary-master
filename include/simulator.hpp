@@ -32,14 +32,17 @@ public:
 
     virtual double playout();
     virtual double playout_WithProb();
+    virtual double playout_WithNotCheckEscape();
 
-
-    
     virtual double run(const size_t count = 1);
 
     virtual double run_WithPlob(const size_t count = 1);
 
     virtual double run_WithPlob(std::string_view, const size_t count = 1);
+
+    virtual double run_WithNotCheckEscape(const size_t count = 1);
+
+    virtual double run_WithNotCheckEscape(std::string_view, const size_t count = 1);
 
     virtual double run(std::string_view, const size_t count = 1);
 

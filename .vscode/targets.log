@@ -10,9 +10,8 @@ make all -f /Users/kanata/Desktop/GeisterLibrary-master/makefile --print-data-ba
 sed: 1: "src/player.cpp": unterminated substitute in regular expression
  
 
-# Make data base, printed on Mon Jan 10 15:55:01 2022
+# Make data base, printed on Tue Jan 11 15:01:11 2022
 
- 
 # Variables
 
 # automatic
@@ -50,7 +49,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/62/57vqj07x0rv7jynrn9h29l280000gn/T/vscode-ipc-7c5e10b0-4674-463a-a643-474818842cb7.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/62/57vqj07x0rv7jynrn9h29l280000gn/T/vscode-ipc-ab3bfaaf-b34c-4518-8b81-28486ccbce43.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -182,7 +181,7 @@ LIB_EXT = so
 # environment
 LANG = C
 # environment
-VSCODE_PID = 604
+VSCODE_PID = 16877
 # makefile (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 17)
 OBJ_EXT = o
 # variable set hash-table stats:
@@ -197,9 +196,9 @@ OBJ_EXT = o
 # obj (device 16777222, inode 5330994): No files, no impossibilities so far.
 # . (device 16777222, inode 5329516): 23 files, no impossibilities.
 # src (device 16777222, inode 5330224): 8 files, no impossibilities.
-# Player (device 16777222, inode 5329518): 31 files, no impossibilities.
+# Player (device 16777222, inode 5329518): 32 files, no impossibilities.
 
-# 62 files, no impossibilities in 4 directories.
+# 63 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
@@ -220,10 +219,10 @@ obj/%.o: %.cpp
 
 # 3 implicit rules, 0 (0.0%) terminal.
 
+ 
 # Files
 
 include/lib/asio/associated_allocator.hpp:
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -414,7 +413,7 @@ include/lib/asio/ip/impl/address_v6.hpp:
 obj/chototsuPlayer.d:
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
-#  Last modified 2022-01-07 00:52:29
+#  Last modified 2022-01-11 00:21:22
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -485,10 +484,10 @@ include/lib/asio/detail/reactive_socket_send_op.hpp:
 
 include/lib/asio/detail/timer_scheduler_fwd.hpp:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
- 
 include/lib/asio/impl/defer.hpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -525,7 +524,7 @@ include/lib/asio/detail/descriptor_ops.hpp:
 
 Player/randomPlayer.hpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-01-07 01:14:30
+#  Last modified 2022-01-10 16:22:24
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -549,11 +548,11 @@ include/lib/asio/ip/detail/impl/endpoint.ipp:
 bin/randomPlayer.so: obj/randomPlayer.o obj/geister.o
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `randomPlayer'
-#  Last modified 2022-01-07 00:52:30
+#  Last modified 2022-01-10 16:53:46
 #  File has been updated.
-#  Needs to be updated (-q is set).
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 #  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 133):
 	$(CXX) $(CXXFLAGS) -shared $^ $(LDFLAGS) -o $@
 	
@@ -675,9 +674,12 @@ include/lib/asio/thread.hpp:
 #  File has not been updated.
 
 Player/Simulator/Simulator1.hpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-11 11:35:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/lib/asio/detail/throw_error.hpp:
 #  Implicit rule search has not been done.
@@ -701,7 +703,6 @@ include/lib/asio/is_executor.hpp:
 
 include/treeNode.hpp:
 #  Implicit rule search has been done.
- 
 #  Last modified 2021-08-09 19:45:07
 #  File has been updated.
 #  Successfully updated.
@@ -725,9 +726,12 @@ include/lib/asio/detail/thread_group.hpp:
 #  File has not been updated.
 
 include/Actionprob.hpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-01-10 16:53:36
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/lib/asio/detail/scheduler_thread_info.hpp:
 #  Implicit rule search has not been done.
@@ -751,6 +755,7 @@ include/lib/asio/impl/error_code.ipp:
 
 include/lib/asio/wait_traits.hpp:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -780,9 +785,12 @@ include/lib/asio/impl/dispatch.hpp:
 #  File has not been updated.
 
 Player/Simulator/all.hpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-02-04 21:49:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/geister.hpp:
 #  Implicit rule search has been done.
@@ -804,9 +812,12 @@ include/lib/asio/system_error.hpp:
 
 # Not a target:
 src/geister.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-01-10 16:49:08
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/hand.hpp:
 #  Implicit rule search has been done.
@@ -970,7 +981,6 @@ include/lib/asio/detail/regex_fwd.hpp:
 include/lib/asio/impl/system_context.ipp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
 
 include/lib/asio/ip/basic_resolver_query.hpp:
@@ -1011,6 +1021,7 @@ include/lib/asio/use_future.hpp:
 bin/Player.out: obj/player.o obj/geister.o obj/simulator.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 #  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 127):
 	$(CXX) $(CXXFLAGS) $^ $(LDFLAGS) -o $@
@@ -1117,14 +1128,37 @@ include/lib/asio/windows/object_handle_service.hpp:
 
 # Not a target:
 Player/chototsuPlayer.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-05-13 15:59:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 bin/Player.so: obj/player.o obj/geister.o obj/simulator.o
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit/static pattern stem: `'
+#  Last modified 2021-12-16 20:36:41
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := bin/Player.so
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := obj/player.o obj/geister.o obj/simulator.o
+# automatic
+# | := 
+# automatic
+# < := obj/player.o
+# automatic
+# ^ := obj/player.o obj/geister.o obj/simulator.o
+# automatic
+# ? := obj/player.o obj/geister.o obj/simulator.o
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
 #  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 130):
 	$(CXX) $(CXXFLAGS) -shared $^ $(LDFLAGS) -o $@
 	
@@ -1158,7 +1192,7 @@ include/lib/asio/io_context_strand.hpp:
 obj/geister.d:
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
-#  Last modified 2022-01-07 00:52:29
+#  Last modified 2022-01-10 16:49:12
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -1171,7 +1205,6 @@ include/lib/asio/ip/resolver_query_base.hpp:
 
 include/lib/asio/detail/conditionally_enabled_event.hpp:
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -1201,9 +1234,12 @@ include/lib/asio/time_traits.hpp:
 #  File has not been updated.
 
 include/simulator.hpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-01-11 14:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/lib/asio/detail/reactive_serial_port_service.hpp:
 #  Implicit rule search has not been done.
@@ -1217,9 +1253,12 @@ include/lib/asio/stream_socket_service.hpp:
 
 # Not a target:
 src/simulator.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-01-11 14:50:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/lib/asio/detail/assert.hpp:
 #  Implicit rule search has not been done.
@@ -1251,21 +1290,25 @@ include/lib/asio/basic_serial_port.hpp:
 obj/randomPlayer.d:
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
-#  Last modified 2022-01-07 00:52:29
+#  Last modified 2022-01-10 16:53:46
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/lib/asio/basic_raw_socket.hpp:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 Player/MCTSPlayer.hpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-01-11 00:33:53
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/lib/asio/windows/overlapped_ptr.hpp:
 #  Implicit rule search has not been done.
@@ -1341,7 +1384,6 @@ include/lib/asio/buffers_iterator.hpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 
 include/lib/asio/ip/resolver_service.hpp:
 #  Implicit rule search has not been done.
@@ -1433,10 +1475,18 @@ include/lib/asio/detail/impl/kqueue_reactor.ipp:
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/chototsuPlayer.o: Player/chototsuPlayer.cpp Player/chototsuPlayer.hpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp include/random.hpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/chototsuPlayer.o: Player/chototsuPlayer.cpp Player/chototsuPlayer.cpp Player/chototsuPlayer.hpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp include/random.hpp
+#  Precious file (prerequisite of .PRECIOUS).
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `chototsuPlayer'
+#  Last modified 2022-01-11 00:21:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 140):
+	$(CXX) $(CXXFLAGS) $(DEFS) -I. -I./include -I./include/lib -c $< -o $@
+	
 
 include/lib/asio/detail/chrono_time_traits.hpp:
 #  Implicit rule search has not been done.
@@ -1505,6 +1555,7 @@ include/lib/asio/basic_deadline_timer.hpp:
 
 release: set-release all
 #  Phony target (prerequisite of .PHONY).
+ 
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
@@ -1519,7 +1570,6 @@ include/lib/asio/impl/io_context.ipp:
 #  File has not been updated.
 
 # Not a target:
- 
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -1575,7 +1625,7 @@ include/lib/asio/detail/impl/kqueue_reactor.hpp:
 obj/client.d:
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
-#  Last modified 2022-01-07 00:52:35
+#  Last modified 2022-01-11 14:33:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -1670,31 +1720,15 @@ include/lib/asio/signal_set_service.hpp:
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/randomPlayer.o: Player/randomPlayer.cpp Player/randomPlayer.hpp include/random.hpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp
+obj/randomPlayer.o: Player/randomPlayer.cpp Player/randomPlayer.cpp Player/randomPlayer.hpp include/random.hpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp include/Actionprob.hpp Player/Encode.hpp
 #  Precious file (prerequisite of .PRECIOUS).
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `randomPlayer'
-#  Last modified 2022-01-07 00:52:29
+#  Last modified 2022-01-10 16:53:46
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := obj/randomPlayer.o
-# automatic
-# % := 
-# automatic
-# * := randomPlayer
-# automatic
-# + := Player/randomPlayer.cpp Player/randomPlayer.cpp Player/randomPlayer.hpp include/random.hpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp
-# automatic
-# | := 
-# automatic
-# < := Player/randomPlayer.cpp
-# automatic
-# ^ := Player/randomPlayer.cpp Player/randomPlayer.hpp include/random.hpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp
-# automatic
-# ? := Player/randomPlayer.hpp
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 #  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 140):
 	$(CXX) $(CXXFLAGS) $(DEFS) -I. -I./include -I./include/lib -c $< -o $@
 	
@@ -1736,6 +1770,7 @@ clean:
 #  File does not exist.
 #  File has not been updated.
 #  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 99):
+ 
 	rm -rf $(OBJ_DIR)/*.*
 	
 
@@ -1750,7 +1785,6 @@ include/lib/asio/detail/handler_work.hpp:
 #  File has not been updated.
 
 include/lib/asio/ip/v6_only.hpp:
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -1759,16 +1793,19 @@ include/lib/asio/ip/v6_only.hpp:
 obj/simulator.d:
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
-#  Last modified 2022-01-07 00:52:31
+#  Last modified 2022-01-11 14:50:53
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 Player/Simulator/Simulator0.hpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-11-16 14:51:03
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/lib/asio/detail/reactive_socket_sendto_op.hpp:
 #  Implicit rule search has not been done.
@@ -1898,10 +1935,18 @@ include/lib/asio/detail/memory.hpp:
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/geister.o: src/geister.cpp include/geister.hpp include/unit.hpp include/impl/unit.hpp include/hand.hpp include/result.hpp include/impl/geister.hpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/geister.o: src/geister.cpp src/geister.cpp include/geister.hpp include/unit.hpp include/impl/unit.hpp include/hand.hpp include/result.hpp include/impl/geister.hpp
+#  Precious file (prerequisite of .PRECIOUS).
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `geister'
+#  Last modified 2022-01-10 16:49:12
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 140):
+	$(CXX) $(CXXFLAGS) $(DEFS) -I. -I./include -I./include/lib -c $< -o $@
+	
 
 include/lib/asio/basic_streambuf.hpp:
 #  Implicit rule search has not been done.
@@ -1939,6 +1984,7 @@ include/lib/asio/detail/reactive_wait_op.hpp:
 #  File has not been updated.
 
 include/lib/asio/ip/impl/address.hpp:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -1949,9 +1995,12 @@ include/lib/asio/detail/atomic_count.hpp:
 #  File has not been updated.
 
 Player/chototsuPlayer.hpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-01-11 00:21:19
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/lib/asio/generic/seq_packet_protocol.hpp:
 #  Implicit rule search has not been done.
@@ -2016,7 +2065,6 @@ include/result.hpp:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
- 
 include/lib/asio/dispatch.hpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -2161,30 +2209,48 @@ include/lib/asio/signal_set.hpp:
 #  File has not been updated.
 
 include/lib/asio/detail/noncopyable.hpp:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 Player/Encode.hpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-11-16 18:29:45
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/lib/asio/detail/signal_set_service.hpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/player.o: src/player.cpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp Player/MCTSPlayer.hpp Player/Simulator/all.hpp Player/Simulator/Simulator0.hpp include/simulator.hpp include/random.hpp Player/Simulator/Simulator1.hpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/player.o: src/player.cpp src/player.cpp include/player.hpp include/hand.hpp include/unit.hpp include/impl/unit.hpp include/geister.hpp include/result.hpp include/impl/geister.hpp include/treeNode.hpp Player/MCTSPlayer.hpp Player/Simulator/all.hpp Player/Simulator/Simulator0.hpp include/simulator.hpp include/random.hpp Player/Simulator/Simulator1.hpp
+#  Precious file (prerequisite of .PRECIOUS).
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `player'
+#  Last modified 2022-01-11 14:41:59
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 140):
+	$(CXX) $(CXXFLAGS) $(DEFS) -I. -I./include -I./include/lib -c $< -o $@
+	
 
-# Not a target:
-bin/chototsuPlayer.so:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+bin/chototsuPlayer.so: obj/chototsuPlayer.o obj/geister.o
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `chototsuPlayer'
+#  Last modified 2022-01-11 00:21:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 133):
+	$(CXX) $(CXXFLAGS) -shared $^ $(LDFLAGS) -o $@
+	
 
 include/lib/asio/detail/timer_queue_ptime.hpp:
 #  Implicit rule search has not been done.
@@ -2201,9 +2267,9 @@ include/lib/asio/connect.hpp:
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/client.o: src/client.cpp include/lib/nonsugar.hpp include/geister.hpp include/unit.hpp include/impl/unit.hpp include/hand.hpp include/result.hpp include/impl/geister.hpp include/tcpClient.hpp include/lib/asio.hpp include/lib/asio/associated_allocator.hpp include/lib/asio/detail/config.hpp include/lib/asio/detail/type_traits.hpp include/lib/asio/detail/push_options.hpp include/lib/asio/detail/pop_options.hpp include/lib/asio/associated_executor.hpp include/lib/asio/is_executor.hpp include/lib/asio/detail/is_executor.hpp include/lib/asio/system_executor.hpp include/lib/asio/impl/system_executor.hpp include/lib/asio/detail/executor_op.hpp include/lib/asio/detail/fenced_block.hpp include/lib/asio/detail/std_fenced_block.hpp include/lib/asio/detail/noncopyable.hpp include/lib/asio/detail/handler_alloc_helpers.hpp include/lib/asio/detail/memory.hpp include/lib/asio/detail/recycling_allocator.hpp include/lib/asio/detail/thread_context.hpp include/lib/asio/detail/call_stack.hpp include/lib/asio/detail/tss_ptr.hpp include/lib/asio/detail/posix_tss_ptr.hpp include/lib/asio/detail/impl/posix_tss_ptr.ipp include/lib/asio/detail/throw_error.hpp include/lib/asio/error_code.hpp include/lib/asio/impl/error_code.ipp include/lib/asio/detail/local_free_on_block_exit.hpp include/lib/asio/detail/socket_types.hpp include/lib/asio/detail/impl/throw_error.ipp include/lib/asio/detail/throw_exception.hpp include/lib/asio/system_error.hpp include/lib/asio/error.hpp include/lib/asio/impl/error.ipp include/lib/asio/detail/thread_info_base.hpp include/lib/asio/handler_alloc_hook.hpp include/lib/asio/impl/handler_alloc_hook.ipp include/lib/asio/detail/handler_invoke_helpers.hpp include/lib/asio/handler_invoke_hook.hpp include/lib/asio/detail/scheduler_operation.hpp include/lib/asio/detail/handler_tracking.hpp include/lib/asio/detail/impl/handler_tracking.ipp include/lib/asio/detail/op_queue.hpp include/lib/asio/detail/global.hpp include/lib/asio/detail/posix_global.hpp include/lib/asio/system_context.hpp include/lib/asio/detail/scheduler.h 
-pp include/lib/asio/execution_context.hpp include/lib/asio/detail/variadic_templates.hpp include/lib/asio/impl/execution_context.hpp include/lib/asio/detail/handler_type_requirements.hpp include/lib/asio/async_result.hpp include/lib/asio/handler_type.hpp include/lib/asio/detail/scoped_ptr.hpp include/lib/asio/detail/service_registry.hpp include/lib/asio/detail/mutex.hpp include/lib/asio/detail/posix_mutex.hpp include/lib/asio/detail/scoped_lock.hpp include/lib/asio/detail/impl/posix_mutex.ipp include/lib/asio/detail/impl/service_registry.hpp include/lib/asio/detail/impl/service_registry.ipp include/lib/asio/impl/execution_context.ipp include/lib/asio/detail/atomic_count.hpp include/lib/asio/detail/conditionally_enabled_event.hpp include/lib/asio/detail/conditionally_enabled_mutex.hpp include/lib/asio/detail/event.hpp include/lib/asio/detail/posix_event.hpp include/lib/asio/detail/assert.hpp include/lib/asio/detail/impl/posix_event.ipp include/lib/asio/detail/null_event.hpp include/lib/asio/detail/impl/null_event.ipp include/lib/asio/detail/reactor_fwd.hpp include/lib/asio/detail/impl/scheduler.ipp include/lib/asio/detail/concurrency_hint.hpp include/lib/asio/detail/limits.hpp include/lib/asio/detail/reactor.hpp include/lib/asio/detail/kqueue_reactor.hpp include/lib/asio/detail/object_pool.hpp include/lib/asio/detail/reactor_op.hpp include/lib/asio/detail/operation.hpp include/lib/asio/detail/select_interrupter.hpp include/lib/asio/detail/pipe_select_interrupter.hpp include/lib/asio/detail/impl/pipe_select_interrupter.ipp include/lib/asio/detail/timer_queue_base.hpp include/lib/asio/detail/timer_queue_set.hpp include/lib/asio/detail/impl/timer_queue_set.ipp include/lib/asio/detail/wait_op.hpp include/lib/asio/detail/impl/kqueue_reactor.hpp include/lib/asio/detail/impl/kqueue_reactor.ipp include/lib/asio/detail/scheduler_thread_info.hpp include/lib/asio/detail/thread_group.hpp include/lib/asio/detail/thread.hpp include/lib/asio/detail/posix_thread.hpp include/lib/asio/detail/impl/posix_thread.ipp include/lib/asio/impl/system_context.hpp include/lib/asio/impl/system_context.ipp include/lib/asio/basic_datagram_socket.hpp include/lib/asio/basic_socket.hpp include/lib/asio/basic_io_object.hpp include/lib/asio/io_context.hpp include/lib/asio/detail/wrapped_handler.hpp include/lib/asio/detail/bind_handler.hpp include/lib/asio/detail/handler_cont_helpers.hpp include/lib/asio/handler_continuation_hook.hpp include/lib/asio/detail/chrono.hpp include/lib/asio/impl/io_context.hpp include/lib/asio/detail/completion_handler.hpp include/lib/asio/detail/handler_work.hpp include/lib/asio/impl/io_context.ipp include/lib/asio/post.hpp include/lib/asio/impl/post.hpp include/lib/asio/detail/work_dispatcher.hpp include/lib/asio/executor_work_guard.hpp include/lib/asio/socket_base.hpp include/lib/asio/detail/io_control.hpp include/lib/asio/detail/socket_option.hpp include/lib/asio/detail/reactive_socket_service.hpp include/lib/asio/buffer.hpp include/lib/asio/detail/array_fwd.hpp include/lib/asio/detail/string_view.hpp include/lib/asio/detail/is_buffer_sequence.hpp include/lib/asio/detail/buffer_sequence_adapter.hpp include/lib/asio/detail/impl/buffer_sequence_adapter.ipp include/lib/asio/detail/reactive_null_buffers_op.hpp include/lib/asio/detail/reactive_socket_accept_op.hpp include/lib/asio/detail/socket_holder.hpp include/lib/asio/detail/socket_ops.hpp include/lib/asio/detail/impl/socket_ops.ipp include/lib/asio/detail/reactive_socket_connect_op.hpp include/lib/asio/detail/reactive_socket_recvfrom_op.hpp include/lib/asio/detail/reactive_socket_sendto_op.hpp include/lib/asio/detail/reactive_socket_service_base.hpp include/lib/asio/detail/reactive_socket_recv_op.hpp include/lib/asio/detail/reactive_socket_recvmsg_op.hpp include/lib/asio/detail/reactive_socket_send_op.hpp include/lib/asio/detail/reactive_wait_op.hpp include/lib/asio/detail/impl/reactive_socket_service_base.ipp include/lib/asio/basic_deadline_timer.hpp include/lib/asio/basic_raw_socket.hpp include/lib/asio/basic_seq_packet_socket.hpp include/lib/asio/basic_serial_port.hpp include/lib/asio/basic_signal_set.hpp include/lib/asio/basic_socket_acceptor.hpp include/lib/asio/basic_socket_iostream.hpp include/lib/asio/basic_socket_streambuf.hpp include/lib/asio/basic_stream_socket.hpp include/lib/asio/steady_timer.hpp include/lib/asio/basic_waitable_timer.hpp include/lib/asio/wait_traits.hpp include/lib/asio/detail/chrono_time_traits.hpp include/lib/asio/detail/cstdint.hpp include/lib/asio/detail/deadline_timer_service.hpp include/lib/asio/detail/timer_queue.hpp include/lib/asio/detail/date_time_fwd.hpp include/lib/asio/detail/timer_queue_ptime.hpp include/lib/asio/detail/timer_scheduler.hpp include/lib/asio/detail/timer_scheduler_fwd.hpp include/lib/asio/detail/wait_handler.hpp include/lib/asio/basic_streambuf.hpp include/lib/asio/basic_streambuf_fwd.hpp include/lib/asio/bind_executor.hpp include/lib/asio/uses_executor.hpp include/lib/asio/buffered_read_stream_fwd.hpp include/lib/asio/buffered_read_stream.hpp include/lib/asio/detail/buffer_resize_guard.hpp include/lib/asio/detail/buffered_stream_storage.hpp include/lib/asio/impl/buffered_read_stream.hpp include/lib/asio/buffered_stream_fwd.hpp include/lib/asio/buffered_stream.hpp include/lib/asio/buffered_write_stream.hpp include/lib/asio/buffered_write_stream_fwd.hpp include/lib/asio/completion_condition.hpp include/lib/asio/write.hpp include/lib/asio/impl/write.hpp include/lib/asio/detail/base_from_completion_cond.hpp include/lib/asio/detail/consuming_buffers.hpp include/lib/asio/detail/dependent_type.hpp include/lib/asio/impl/buffered_write_stream.hpp include/lib/asio/buffers_iterator.hpp include/lib/asio/connect.hpp include/lib/asio/impl/connect.hpp include/lib/asio/coroutine.hpp include/lib/asio/datagram_socket_service.hpp include/lib/asio/deadline_timer_service.hpp include/lib/asio/deadline_timer.hpp include/lib/asio/defer.hpp include/lib/asio/impl/defer.hpp include/lib/asio/dispatch.hpp include/lib/asio/impl/dispatch.hpp include/lib/asio/executor.hpp include/lib/asio/detail/cstddef.hpp include/lib/asio/impl/executor.hpp include/lib/asio/impl/executor.ipp include/lib/asio/generic/basic_endpoint.hpp include/lib/asio/generic/detail/endpoint.hpp include/lib/asio/generic/detail/impl/endpoint.ipp include/lib/asio/generic/datagram_protocol.hpp include/lib/asio/generic/raw_protocol.hpp include/lib/asio/generic/seq_packet_protocol.hpp include/lib/asio/generic/stream_protocol.hpp include/lib/asio/high_resolution_timer.hpp include/lib/asio/io_context_strand.hpp include/lib/asio/detail/strand_service.hpp include/lib/asio/detail/impl/strand_service.hpp include/lib/asio/detail/impl/strand_service.ipp include/lib/asio/io_service.hpp include/lib/asio/io_service_strand.hpp include/lib/asio/ip/address.hpp include/lib/asio/ip/address_v4.hpp include/lib/asio/detail/array.hpp include/lib/asio/detail/winsock_init.hpp include/lib/asio/ip/impl/address_v4.hpp include/lib/asio/ip/impl/address_v4.ipp include/lib/asio/ip/address_v6.hpp include/lib/asio/ip/impl/address_v6.hpp include/lib/asio/ip/impl/address_v6.ipp include/lib/asio/ip/bad_address_cast.hpp include/lib/asio/ip/impl/address.hpp include/lib/asio/ip/impl/address.ipp include/lib/asio/ip/address_v4_iterator.hpp include/lib/asio/ip/address_v4_range.hpp include/lib/asio/ip/address_v6_iterator.hpp include/lib/asio/ip/address_v6_range.hpp include/lib/asio/ip/basic_endpoint.hpp include/lib/asio/ip/detail/endpoint.hpp include/lib/asio/ip/detail/impl/endpoint.ipp include/lib/asio/ip/impl/basic_endpoint.hpp include/lib/asio/ip/basic_resolver.hpp include/lib/asio/ip/basic_resolver_iterator.hpp include/lib/asio/ip/basic_resolver_entry.hpp include/lib/asio/ip/basic_resolver_query.hpp include/lib/asio/ip/resolver_query_base.hpp include/lib/asio/ip/resolver_base.hpp include/lib/asio/ip/basic_resolver_results.hpp include/lib/asio/detail/resolver_service.hpp include/lib/asio/detail/resolve_endpoint_op.hpp include/lib/asio/detail/resolve_op.hpp include/lib/asio/detail/resolve_query_op.hpp include/lib/asio/detail/resolver_service_base.hpp include/lib/asio/detail/impl/resolver_service_base.ipp include/lib/asio/ip/host_name.hpp inc 
-lude/lib/asio/ip/impl/host_name.ipp include/lib/asio/ip/icmp.hpp include/lib/asio/ip/multicast.hpp include/lib/asio/ip/detail/socket_option.hpp include/lib/asio/ip/resolver_service.hpp include/lib/asio/ip/tcp.hpp include/lib/asio/ip/udp.hpp include/lib/asio/ip/unicast.hpp include/lib/asio/ip/v6_only.hpp include/lib/asio/is_read_buffered.hpp include/lib/asio/is_write_buffered.hpp include/lib/asio/local/basic_endpoint.hpp include/lib/asio/local/detail/endpoint.hpp include/lib/asio/local/detail/impl/endpoint.ipp include/lib/asio/local/connect_pair.hpp include/lib/asio/local/datagram_protocol.hpp include/lib/asio/local/stream_protocol.hpp include/lib/asio/packaged_task.hpp include/lib/asio/detail/future.hpp include/lib/asio/placeholders.hpp include/lib/asio/posix/basic_descriptor.hpp include/lib/asio/posix/basic_stream_descriptor.hpp include/lib/asio/posix/descriptor.hpp include/lib/asio/detail/reactive_descriptor_service.hpp include/lib/asio/detail/descriptor_ops.hpp include/lib/asio/detail/impl/descriptor_ops.ipp include/lib/asio/detail/descriptor_read_op.hpp include/lib/asio/detail/descriptor_write_op.hpp include/lib/asio/posix/descriptor_base.hpp include/lib/asio/detail/impl/reactive_descriptor_service.ipp include/lib/asio/posix/stream_descriptor.hpp include/lib/asio/posix/stream_descriptor_service.hpp include/lib/asio/raw_socket_service.hpp include/lib/asio/read.hpp include/lib/asio/impl/read.hpp include/lib/asio/read_at.hpp include/lib/asio/impl/read_at.hpp include/lib/asio/read_until.hpp include/lib/asio/detail/regex_fwd.hpp include/lib/asio/impl/read_until.hpp include/lib/asio/seq_packet_socket_service.hpp include/lib/asio/serial_port.hpp include/lib/asio/serial_port_base.hpp include/lib/asio/impl/serial_port_base.hpp include/lib/asio/impl/serial_port_base.ipp include/lib/asio/detail/reactive_serial_port_service.hpp include/lib/asio/detail/impl/reactive_serial_port_service.ipp include/lib/asio/serial_port_service.hpp include/lib/asio/signal_set.hpp include/lib/asio/detail/signal_set_service.hpp include/lib/asio/detail/signal_handler.hpp include/lib/asio/detail/signal_op.hpp include/lib/asio/detail/impl/signal_set_service.ipp include/lib/asio/detail/signal_blocker.hpp include/lib/asio/detail/posix_signal_blocker.hpp include/lib/asio/detail/static_mutex.hpp include/lib/asio/detail/posix_static_mutex.hpp include/lib/asio/signal_set_service.hpp include/lib/asio/socket_acceptor_service.hpp include/lib/asio/strand.hpp include/lib/asio/detail/strand_executor_service.hpp include/lib/asio/detail/impl/strand_executor_service.hpp include/lib/asio/detail/impl/strand_executor_service.ipp include/lib/asio/stream_socket_service.hpp include/lib/asio/streambuf.hpp include/lib/asio/system_timer.hpp include/lib/asio/thread.hpp include/lib/asio/thread_pool.hpp include/lib/asio/impl/thread_pool.hpp include/lib/asio/impl/thread_pool.ipp include/lib/asio/time_traits.hpp include/lib/asio/use_future.hpp include/lib/asio/impl/use_future.hpp include/lib/asio/version.hpp include/lib/asio/waitable_timer_service.hpp include/lib/asio/windows/basic_handle.hpp include/lib/asio/windows/basic_object_handle.hpp include/lib/asio/windows/basic_random_access_handle.hpp include/lib/asio/windows/basic_stream_handle.hpp include/lib/asio/windows/object_handle.hpp include/lib/asio/windows/object_handle_service.hpp include/lib/asio/windows/overlapped_handle.hpp include/lib/asio/windows/overlapped_ptr.hpp include/lib/asio/windows/random_access_handle.hpp include/lib/asio/windows/random_access_handle_service.hpp include/lib/asio/windows/stream_handle.hpp include/lib/asio/windows/stream_handle_service.hpp include/lib/asio/write_at.hpp include/lib/asio/impl/write_at.hpp include/random.hpp include/player.hpp include/treeNode.hpp
+obj/client.o: src/client.cpp include/lib/nonsugar.hpp include/geister.hpp include/unit.hpp include/impl/unit.hpp include/hand.hpp include/result.hpp include/impl/geister.hpp include/tcpClient.hpp include/lib/asio.hpp include/lib/asio/associated_allocator.hpp include/lib/asio/detail/config.hpp include/lib/asio/detail/type_traits.hpp include/lib/asio/detail/push_options.hpp include/lib/asio/detail/pop_options.hpp include/lib/asio/associated_executor.hpp include/lib/asio/is_executor.hpp include/lib/asio/detail/is_executor.hpp include/lib/asio/system_executor.hpp include/lib/asio/impl/system_executor.hpp include/lib/asio/detail/executor_op.hpp include/lib/asio/detail/fenced_block.hpp include/lib/asio/detail/std_fenced_block.hpp include/lib/asio/detail/noncopyable.hpp include/lib/asio/detail/handler_alloc_helpers.hpp include/lib/asio/detail/memory.hpp include/lib/asio/detail/recycling_allocator.hpp include/lib/asio/detail/thread_context.hpp include/lib/asio/detail/call_stack.hpp include/lib/asio/detail/tss_ptr.hpp include/lib/asio/detail/posix_tss_ptr.hpp include/lib/asio/detail/impl/posix_tss_ptr.ipp include/lib/asio/detail/throw_error.hpp include/lib/asio/error_code.hpp include/lib/asio/impl/error_code.ipp include/lib/asio/detail/local_free_on_block_exit.hpp include/lib/asio/detail/socket_types.hpp include/lib/asio/detail/impl/throw_error.ipp include/lib/asio/detail/throw_exception.hpp include/lib/asio/system_error.hpp include/lib/asio/error.hpp include/lib/asio/impl/error.ipp include/lib/asio/detail/thread_info_base.hpp include/lib/asio/handler_alloc_hook.hpp include/lib/asio/impl/handler_alloc_hook.ipp include/lib/asio/detail/handler_invoke_helpers.hpp include/lib/asio/handler_invoke_hook.hpp include/lib/asio/detail/scheduler_operation.hpp include/lib/asio/detail/handler_tracking.hpp include/lib/asio/detail/impl/handler_tracking.ipp include/lib/asio/detail/op_queue.hpp include/lib/asio/detail/global.hpp include/lib/asio/detail/posix_global.hpp include/lib/asio/system_context.hpp include/lib/asio/detail/scheduler.hpp include/lib/asio/execution_context.hpp include/lib/asio/detail/variadic_templates.hpp include/lib/asio/impl/execution_context.hpp include/lib/asio/detail/handler_type_requirements.hpp include/lib/asio/async_result.hpp include/lib/asio/handler_type.hpp include/lib/asio/detail/scoped_ptr.hpp include/lib/asio/detail/service_registry.hpp include/lib/asio/detail/mutex.hpp include/lib/asio/detail/posix_mutex.hpp include/lib/asio/detail/scoped_lock.hpp include/lib/asio/detail/impl/posix_mutex.ipp include/lib/asio/detail/impl/service_registry.hpp include/lib/asio/detail/impl/service_registry.ipp include/lib/asio/impl/execution_context.ipp include/lib/asio/detail/atomic_count.hpp include/lib/asio/detail/conditionally_enabled_event.hpp include/lib/asio/detail/conditionally_enabled_mutex.hpp include/lib/asio/detail/event.hpp include/lib/asio/detail/posix_event.hpp include/lib/asio/detail/assert.hpp include/lib/asio/detail/impl/posix_event.ipp include/lib/asio/detail/null_event.hpp include/lib/asio/detail/impl/null_event.ipp include/lib/asio/detail/reactor_fwd.hpp include/lib/asio/detail/impl/scheduler.ipp include/lib/asio/detail/concurrency_hint.hpp include/lib/asio/detail/limits.hpp include/lib/asio/detail/reactor.hpp include/lib/asio/detail/kqueue_reactor.hpp include/lib/asio/detail/object_pool.hpp include/lib/asio/detail/reactor_op.hpp include/lib/asio/detail/operation.hpp include/lib/asio/detail/select_interrupter.hpp include/lib/asio/detail/pipe_select_interrupter.hpp include/lib/asio/detail/impl/pipe_select_interrupter.ipp include/lib/asio/detail/timer_queue_base.hpp include/lib/asio/detail/timer_queue_set.hpp include/lib/asio/detail/impl/timer_queue_set.ipp include/lib/asio/detail/wait_op.hpp include/lib/asio/detail/impl/kqueue_reactor.hpp include/lib/asio/detail/impl/kqueue_reactor.ipp include/lib/asio/detail/scheduler_thread_info.hpp include/lib/asio/detail/thread_group.hpp include/lib/asio/detail/thread.hpp include/lib/asio/detail/posix_thread.hpp include/lib/asio/detail/impl/posix_thread.ipp include/lib/asio/impl/system_context.hpp include/lib/asio/impl/system_context.ipp include/lib/asio/basic_datagram_socket.hpp include/lib/asio/basic_socket.hpp include/lib/asio/basic_io_object.hpp include/lib/asio/io_context.hpp include/lib/asio/detail/wrapped_handler.hpp include/lib/asio/detail/bind_handler.hpp include/lib/asio/detail/handler_cont_helpers.hpp include/lib/asio/handler_continuation_hook.hpp include/lib/asio/detail/chrono.hpp include/lib/asio/impl/io_context.hpp include/lib/asio/detail/completion_handler.hpp include/lib/asio/detail/handler_work.hpp include/lib/asio/impl/io_context.ipp include/lib/asio/post.hpp include/lib/asio/impl/post.hpp include/lib/asio/detail/work_dispatcher.hpp include/lib/asio/executor_work_guard.hpp include/lib/asio/socket_base.hpp include/lib/asio/detail/io_control.hpp include/lib/asio/detail/socket_option.hpp include/lib/asio/detail/reactive_socket_service.hpp include/lib/asio/buffer.hpp include/lib/asio/detail/array_fwd.hpp include/lib/asio/detail/string_view.hpp include/lib/asio/detai 
+l/is_buffer_sequence.hpp include/lib/asio/detail/buffer_sequence_adapter.hpp include/lib/asio/detail/impl/buffer_sequence_adapter.ipp include/lib/asio/detail/reactive_null_buffers_op.hpp include/lib/asio/detail/reactive_socket_accept_op.hpp include/lib/asio/detail/socket_holder.hpp include/lib/asio/detail/socket_ops.hpp include/lib/asio/detail/impl/socket_ops.ipp include/lib/asio/detail/reactive_socket_connect_op.hpp include/lib/asio/detail/reactive_socket_recvfrom_op.hpp include/lib/asio/detail/reactive_socket_sendto_op.hpp include/lib/asio/detail/reactive_socket_service_base.hpp include/lib/asio/detail/reactive_socket_recv_op.hpp include/lib/asio/detail/reactive_socket_recvmsg_op.hpp include/lib/asio/detail/reactive_socket_send_op.hpp include/lib/asio/detail/reactive_wait_op.hpp include/lib/asio/detail/impl/reactive_socket_service_base.ipp include/lib/asio/basic_deadline_timer.hpp include/lib/asio/basic_raw_socket.hpp include/lib/asio/basic_seq_packet_socket.hpp include/lib/asio/basic_serial_port.hpp include/lib/asio/basic_signal_set.hpp include/lib/asio/basic_socket_acceptor.hpp include/lib/asio/basic_socket_iostream.hpp include/lib/asio/basic_socket_streambuf.hpp include/lib/asio/basic_stream_socket.hpp include/lib/asio/steady_timer.hpp include/lib/asio/basic_waitable_timer.hpp include/lib/asio/wait_traits.hpp include/lib/asio/detail/chrono_time_traits.hpp include/lib/asio/detail/cstdint.hpp include/lib/asio/detail/deadline_timer_service.hpp include/lib/asio/detail/timer_queue.hpp include/lib/asio/detail/date_time_fwd.hpp include/lib/asio/detail/timer_queue_ptime.hpp include/lib/asio/detail/timer_scheduler.hpp include/lib/asio/detail/timer_scheduler_fwd.hpp include/lib/asio/detail/wait_handler.hpp include/lib/asio/basic_streambuf.hpp include/lib/asio/basic_streambuf_fwd.hpp include/lib/asio/bind_executor.hpp include/lib/asio/uses_executor.hpp include/lib/asio/buffered_read_stream_fwd.hpp include/lib/asio/buffered_read_stream.hpp include/lib/asio/detail/buffer_resize_guard.hpp include/lib/asio/detail/buffered_stream_storage.hpp include/lib/asio/impl/buffered_read_stream.hpp include/lib/asio/buffered_stream_fwd.hpp include/lib/asio/buffered_stream.hpp include/lib/asio/buffered_write_stream.hpp include/lib/asio/buffered_write_stream_fwd.hpp include/lib/asio/completion_condition.hpp include/lib/asio/write.hpp include/lib/asio/impl/write.hpp include/lib/asio/detail/base_from_completion_cond.hpp include/lib/asio/detail/consuming_buffers.hpp include/lib/asio/detail/dependent_type.hpp include/lib/asio/impl/buffered_write_stream.hpp include/lib/asio/buffers_iterator.hpp include/lib/asio/connect.hpp include/lib/asio/impl/connect.hpp include/lib/asio/coroutine.hpp include/lib/asio/datagram_socket_service.hpp include/lib/asio/deadline_timer_service.hpp include/lib/asio/deadline_timer.hpp include/lib/asio/defer.hpp include/lib/asio/impl/defer.hpp include/lib/asio/dispatch.hpp include/lib/asio/impl/dispatch.hpp include/lib/asio/executor.hpp include/lib/asio/detail/cstddef.hpp include/lib/asio/impl/executor.hpp include/lib/asio/impl/executor.ipp include/lib/asio/generic/basic_endpoint.hpp include/lib/asio/generic/detail/endpoint.hpp include/lib/asio/generic/detail/impl/endpoint.ipp include/lib/asio/generic/datagram_protocol.hpp include/lib/asio/generic/raw_protocol.hpp include/lib/asio/generic/seq_packet_protocol.hpp include/lib/asio/generic/stream_protocol.hpp include/lib/asio/high_resolution_timer.hpp include/lib/asio/io_context_strand.hpp include/lib/asio/detail/strand_service.hpp include/lib/asio/detail/impl/strand_service.hpp include/lib/asio/detail/impl/strand_service.ipp include/lib/asio/io_service.hpp include/lib/asio/io_service_strand.hpp include/lib/asio/ip/address.hpp include/lib/asio/ip/address_v4.hpp include/lib/asio/detail/array.hpp include/lib/asio/detail/winsock_init.hpp include/lib/asio/ip/impl/address_v4.hpp include/lib/asio/ip/impl/address_v4.ipp include/lib/asio/ip/address_v6.hpp include/lib/asio/ip/impl/address_v6.hpp include/lib/asio/ip/impl/address_v6.ipp include/lib/asio/ip/bad_address_cast.hpp include/lib/asio/ip/impl/address.hpp include/lib/asio/ip/impl/address.ipp include/lib/asio/ip/address_v4_iterator.hpp include/lib/asio/ip/address_v4_range.hpp include/lib/asio/ip/address_v6_iterator.hpp include/lib/asio/ip/address_v6_range.hpp include/lib/asio/ip/basic_endpoint.hpp include/lib/asio/ip/detail/endpoint.hpp include/lib/asio/ip/detail/impl/endpoint.ipp include/lib/asio/ip/impl/basic_endpoint.hpp include/lib/asio/ip/basic_resolver.hpp include/lib/asio/ip/basic_resolver_iterator.hpp include/lib/asio/ip/basic_resolver_entry.hpp include/lib/asio/ip/basic_resolver_query.hpp include/lib/asio/ip/resolver_query_base.hpp include/lib/asio/ip/resolver_base.hpp include/lib/asio/ip/basic_resolver_results.hpp include/lib/asio/detail/resolver_service.hpp include/lib/asio/detail/resolve_endpoint_op.hpp include/lib/asio/detail/resolve_op.hpp include/lib/asio/detail/resolve_query_op.hpp include/lib/asio/detail/resolver_service_base.hpp include/lib/asio/detail/impl/resolver_service_base.ipp include/lib/asio/ip/host_name.hpp include/lib/asio/ip/impl/host_name.ipp include/lib/asio/ip/icmp.hpp include/lib/asio/ip/multicast.hpp include/lib/asio/ip/detail/socket_option.hpp include/lib/asio/ip/resolver_service.hpp include/lib/asio/ip/tcp.hpp include/lib/asio/ip/udp.hpp include/lib/asio/ip/unicast.hpp include/lib/asio/ip/v6_only.hpp include/lib/asio/is_read_buffered.hpp include/lib/asio/is_write_buffered.hpp include/lib/asio/local/basic_endpoint.hpp include/lib/asio/local/detail/endpoint.hpp include/lib/asio/local/detail/impl/endpoint.ipp include/lib/asio/local/connect_pair.hpp include/lib/asio/local/datagram_protocol.hpp include/lib/asio/local/stream_protocol.hpp include/lib/asio/packaged_task.hpp include/lib/asio/detail/future.hpp include/lib/asio/placeholders.hpp include/lib/asio/posix/basic_descriptor.hpp include/lib/asio/posix/basic_stream_descriptor.hpp include/lib/asio/posix/descriptor.hpp include/lib/asio/detail/reactive_descriptor_service.hpp include/lib/asio/detail/descriptor_ops.hpp include/lib/asio/detail/impl/descriptor_ops.ipp include/lib/asio/detail/descriptor_read_op.hpp include/lib/asio/detail/descriptor_write_op.hpp include/lib/asio/posix/descriptor_base.hpp include/lib/asio/detail/impl/reactive_descriptor_service.ipp include/lib/asio/posix/stream_descriptor.hpp include/lib/asio/posix/stream_descriptor_service.hpp include/lib/asio/raw_socket_service.hpp include/lib/asio/read.hpp include/lib/asio/impl/read.hpp include/lib/asio/read_at.hpp include/lib/asio/impl/read_at.hpp include/lib/asio/read_until.hpp include/lib/asio/detail/regex_fwd.hpp include/lib/asio/impl/read_until.hpp include/lib/asio/seq_packet_socket_service.hpp include/lib/asio/serial_port.hpp include/lib/asio/serial_port_base.hpp include/lib/asio/impl/serial_port_base.hpp include/lib/asio/impl/serial_port_base.ipp include/lib/asio/detail/reactive_serial_port_service.hpp include/lib/asio/detail/impl/reactive_serial_port_service.ipp include/lib/asio/serial_port_service.hpp include/lib/asio/signal_set.hpp include/lib/asio/detail/signal_set_service.hpp include/lib/asio/detail/signal_handler.hpp include/lib/asio/detail/signal_op.hpp include/lib/asio/detail/impl/signal_set_service.ipp include/lib/asio/detail/signal_blocker.hpp include/lib/asio/detail/posix_signal_blocker.hpp include/lib/asio/detail/static_mutex.hpp include/lib/asio/detail/posix_static_mutex.hpp include/lib/asio/signal_set_service.hpp include/lib/asio/socket_acceptor_service.hpp include/lib/asio/strand.hpp include/lib/asio/detail/strand_executor_service.hpp include/lib/asio/detail/impl/strand_executor_service.hpp include/lib/asio/detail/impl/strand_executor_service.ipp include/lib/asio/stream_socket_service.hpp include/lib/asio/streambuf.hpp include/lib/asio/system_timer.hpp include/lib/asio/thread.hpp include/lib/asio/thread_pool.hpp include/lib/asio/impl/thread_pool.hpp include/lib/asio/impl/thread_pool.ipp include/lib/asio/time_traits.hpp include/lib/asio/use_future.hpp include/lib/asio/impl/use_future.hpp include/lib/asio/version.hpp include/lib/asio/waitable_timer_service.hpp include/lib/asio/windows/b 
+asic_handle.hpp include/lib/asio/windows/basic_object_handle.hpp include/lib/asio/windows/basic_random_access_handle.hpp include/lib/asio/windows/basic_stream_handle.hpp include/lib/asio/windows/object_handle.hpp include/lib/asio/windows/object_handle_service.hpp include/lib/asio/windows/overlapped_handle.hpp include/lib/asio/windows/overlapped_ptr.hpp include/lib/asio/windows/random_access_handle.hpp include/lib/asio/windows/random_access_handle_service.hpp include/lib/asio/windows/stream_handle.hpp include/lib/asio/windows/stream_handle_service.hpp include/lib/asio/write_at.hpp include/lib/asio/impl/write_at.hpp include/random.hpp include/player.hpp include/treeNode.hpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -2277,7 +2343,7 @@ include/player.hpp:
 obj/player.d:
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
-#  Last modified 2022-01-07 00:52:30
+#  Last modified 2022-01-11 14:41:59
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -2295,9 +2361,12 @@ include/lib/asio/detail/socket_option.hpp:
 
 # Not a target:
 src/player.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-12-27 17:12:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 include/lib/asio/impl/use_future.hpp:
 #  Implicit rule search has not been done.
@@ -2329,10 +2398,18 @@ include/lib/asio/basic_streambuf_fwd.hpp:
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/simulator.o: src/simulator.cpp include/geister.hpp include/unit.hpp include/impl/unit.hpp include/hand.hpp include/result.hpp include/impl/geister.hpp include/simulator.hpp include/random.hpp include/Actionprob.hpp Player/Encode.hpp
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/simulator.o: src/simulator.cpp src/simulator.cpp include/geister.hpp include/unit.hpp include/impl/unit.hpp include/hand.hpp include/result.hpp include/impl/geister.hpp include/simulator.hpp include/random.hpp include/Actionprob.hpp Player/Encode.hpp
+#  Precious file (prerequisite of .PRECIOUS).
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `simulator'
+#  Last modified 2022-01-11 14:50:53
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `/Users/kanata/Desktop/GeisterLibrary-master/makefile', line 140):
+	$(CXX) $(CXXFLAGS) $(DEFS) -I. -I./include -I./include/lib -c $< -o $@
+	
 
 include/lib/asio/windows/basic_random_access_handle.hpp:
 #  Implicit rule search has not been done.
@@ -2344,7 +2421,6 @@ include/lib/asio/detail/limits.hpp:
 #  Modification time never checked.
 #  File has not been updated.
 
- 
 include/lib/asio/detail/socket_types.hpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -2353,6 +2429,7 @@ include/lib/asio/detail/socket_types.hpp:
 include/lib/asio/async_result.hpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 
 include/lib/asio/detail/handler_invoke_helpers.hpp:
@@ -2381,7 +2458,7 @@ include/lib/asio/local/detail/impl/endpoint.ipp:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=394/1024=38%, Rehash=0, Collisions=244/940=26%
+# Load=394/1024=38%, Rehash=0, Collisions=251/996=25%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -2394,6 +2471,6 @@ include/lib/asio/local/detail/impl/endpoint.ipp:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 3855 / max = 3855 / min = 3855 / avg = 3855
 
-# Finished Make data base on Mon Jan 10 15:55:01 2022
+# Finished Make data base on Tue Jan 11 15:01:11 2022
 
  

@@ -13,6 +13,7 @@ c++ -MMD -MP -std=c++17 -w -O -fPIC -shared obj/player.o obj/geister.o obj/simul
  
 c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -DSIMULATOR=Simulator0 -I. -I./include -I./include/lib -c src/client.cpp -o obj/client.o
 c++ -MMD -MP -std=c++17 -w -O -fPIC obj/client.o obj/geister.o -ldl -lpthread -o bin/client.out
+ 
 c++ -MMD -MP -std=c++17 -w -O -fPIC -DPLAYER_NAME=Player -DPLAYER_CLASS=RandomPlayer -DSIMULATOR=Simulator0 -I. -I./include -I./include/lib -c src/competition.cpp -o obj/competition.o
 c++ -MMD -MP -std=c++17 -w -O -fPIC obj/competition.o obj/geister.o -ldl -lpthread -o bin/competition.out
 c++ -MMD -MP -std=c++17 -w -O -fPIC obj/player.o obj/geister.o obj/simulator.o -ldl -lpthread -o bin/Player.out

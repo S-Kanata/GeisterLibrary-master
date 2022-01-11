@@ -21,6 +21,7 @@ public:
     virtual std::string decideRed(){
         cpprefjp::random_device rd;
         std::mt19937 mt(rd());
+        std::cout << "This is not Kufu" << std::endl;
 
         std::uniform_int_distribution<int> serector(0, pattern.size() - 1);
         return pattern[serector(mt)];
@@ -50,11 +51,13 @@ public:
             auto m = legalMoves[l];
             SIMULATOR s(game);
             s.root.move(m);
-            rewards[l] += s.run_WithPlob(100);
+            rewards[l] += s.run_WithNotCheckEscape(100);
         }
 
         auto&& max_iter = std::max_element(rewards.begin(), rewards.end());
         int index = std::distance(rewards.begin(), max_iter);
+
+        std::cout << "NotKufu's Max Reward is " << rewards[index] << std::endl;
         return legalMoves[index];
 
         /*

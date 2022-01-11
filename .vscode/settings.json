@@ -97,7 +97,8 @@
         "cfenv": "cpp",
         "cinttypes": "cpp",
         "xstring": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "filesystem": "cpp"
     },
     "git.ignoreLimitWarning": true
 }

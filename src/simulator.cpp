@@ -190,6 +190,52 @@ double Simulator::playout_WithProb(){
     return evaluate_forProb(isMyturn);
 }
 
+double Simulator::playout_WithNotCheckEscape(){
+    std::vector<Hand> lm;
+    std::vector<Hand> enemylm;
+    std::vector<double> currentpies;
+    currentpies.reserve(32);
+    lm.reserve(32);
+    enemylm.reserve(32);
+    Hand m1, m2;
+    MaxDepth = MAXDEPTH;
+    isMyturn = true;
+
+    for(int c = 0; c < MaxDepth; c++){
+        
+        if(current.isEnd()){ //終了判定
+            isMyturn = true;
+            break;
+        }
+        // 相手の手番
+        current.changeSide();
+        currentpies = GetCurrentPi(current);
+        int index = DecideIndex(currentpies);
+        enemylm = current.getLegalMove1st();
+        m1 = enemylm[index];
+
+        current.move(m1);
+
+        if(current.isEnd()){ //終了判定
+            isMyturn = false;
+            break;
+        }
+
+        // 自分の手番
+        current.changeSide();
+        currentpies = GetCurrentPi(current);
+
+        int index2 = DecideIndex(currentpies);
+        lm = current.getLegalMove1st();
+        
+        m2 = lm[index2];
+
+        current.move(m2);
+
+    }
+    return evaluate_forProb(isMyturn);
+}
+
 double Simulator::run(const size_t count){
     double result = 0.0;
     for(size_t i = 0; i < count; ++i){
@@ -234,6 +280,29 @@ double Simulator::run_WithPlob(std::string_view ptn, const size_t count){
     }
     return result;
 }
+
+double Simulator::run_WithNotCheckEscape(const size_t count){
+    settheta();
+    double result = 0.0;
+    for(size_t i = 0; i < count; ++i){
+        current = root;
+        setColor(getRandomPattern());
+        result += playout_WithNotCheckEscape();
+    }
+        return result;
+}
+
+double Simulator::run_WithNotCheckEscape(std::string_view ptn, const size_t count){
+    double result = 0.0;
+    for(size_t i = 0; i < count; ++i){
+        current = root;
+        setColor(ptn);
+        result += playout_WithNotCheckEscape();
+    }
+    return result;
+}
+
+
 
 
 

@@ -131,10 +131,14 @@ public:
 
     std::vector<double> theta;   //行動パラメータθ
     std::vector<int> EnemyColor; //敵駒色の推定
+    std::vector<int> EstimatedRed; //敵駒色の推定
+    std::vector<std::vector<int>> AfterPosition; //推定した駒の移動先
 
     virtual std::string decideRed(){
         int pc = PLAYOUT_COUNT;
-        EnemyColor.reserve(20);
+        EnemyColor = std::vector<int>(16);
+        EstimatedRed = std::vector<int>(16);
+        AfterPosition = std::vector<std::vector<int>>(16, std::vector<int>(37));
         printf("%d\n", pc);
         printf("%lf\n", alpha);
         fflush(stdout);
@@ -202,7 +206,29 @@ protected:
             return escapehand;
         }
 
+        //脱出をしてこなかった相手駒を赤駒と断定
+        auto enemy = game;
+        enemy.changeSide();
+        auto units = enemy.allUnit();
+        for(int i = 0; i < 16; i++){
+            if(EstimatedRed[i] == 1){
+                int pos = units[i].x() + units[i].y() * 6;
+                if(pos < 37){
+                    if(!AfterPosition[i][pos]==1)
+                    {
+                        EnemyColor[i] = 1;
+                    }
+                }
+            }
+        }
 
+        for(int i = 0; i < 16; i++){
+            if(EnemyColor[i]==1){
+                game.setColor(i+8, UnitColor::red);
+                printf("Discovered red!!\n position, %d, %d\n", units[i].x(), units[i].y());
+            }
+        }
+        
         // 合法手の列挙
         auto legalPattern = getLegalPattern(game);
         MCTNode Tree(game);
@@ -221,22 +247,6 @@ protected:
                 }
         }
 
-
-        /*
-        for(auto&& tree:trees){
-            auto legalMoves = tree.root.getLegalMove1st();
-            for(auto&& lm: legalMoves){
-                auto child = tree;
-                child.root.move(lm);
-                tree.children.push_back(child);
-            }
-            for(int i = 0; i < playoutCount; ++i){
-                
-                tree.select();
-            
-            }
-        }
-        */
         auto lm = game.getLegalMove1st();
         std::vector<double> visits(lm.size());
         for(int i = 0; i < lm.size(); ++i){
@@ -252,13 +262,70 @@ protected:
             }
         }
 
-        
-        auto copy = game;
-        copy.move(lm[index]);
-        copy.printBoard();
+        auto enemyboard = game;
+        enemyboard.move(lm[index]);
         fflush(stdout);
+        enemyboard.changeSide();
+        
+        if(enemyboard.IsExistUnit(0,0) > 0){
+            
+            for(int i = 0; i < 16; i++){
+                if ((units[i].x()== 0)&&(units[i].y() == 0)){
+                    enemyboard.setColor(i, UnitColor::Blue);
+                }
+                if ((units[i].x()== 5)&&(units[i].y() == 0)){
+                    enemyboard.setColor(i, UnitColor::Blue);
+                }
+                if ((units[i].x()== 0)&&(units[i].y() == 1)){
+                    enemyboard.setColor(i, UnitColor::Blue);
+                }
+                if ((units[i].x()== 1)&&(units[i].y() == 0)){
+                    enemyboard.setColor(i, UnitColor::Blue);
+                }
+                if ((units[i].x()== 4)&&(units[i].y() == 0)){
+                    enemyboard.setColor(i, UnitColor::Blue);
+                }
+                if ((units[i].x()== 5)&&(units[i].y() == 1)){
+                    enemyboard.setColor(i, UnitColor::Blue);
+                }
+            }
+        }
 
+        int canescapeenemy = CheckCanEscape(enemyboard);
 
+        if(canescapeenemy == 1){
+            for(int i = 0; i < 16; i++){
+                if ((units[i].x() == 0)&&(units[i].y() == 0)){
+                    EstimatedRed[i] = 1;
+                    AfterPosition[i][36] = 1;
+                }
+                if ((units[i].x() == 5)&&(units[i].y() == 0)){
+                    EstimatedRed[i] = 1;
+                    AfterPosition[i][36] = 1;
+                }
+            }
+        }
+
+        if(canescapeenemy == 3){
+            for(int i = 0; i < 16; i++){
+                if ((units[i].x() == 0)&&(units[i].y() == 1)){
+                    EstimatedRed[i] = 1;
+                    AfterPosition[i][0] = 1;
+                }
+                if ((units[i].x() == 1)&&(units[i].y() == 0)){
+                    EstimatedRed[i] = 1;
+                    AfterPosition[i][0] = 1;
+                }
+                if ((units[i].x() == 5)&&(units[i].y() == 1)){
+                    EstimatedRed[i] = 1;
+                    AfterPosition[i][5] = 1;
+                }
+                if ((units[i].x() == 4)&&(units[i].y() == 0)){
+                    EstimatedRed[i] = 1;
+                    AfterPosition[i][5] = 1;
+                }
+            }
+        }
         return lm[index];
     }
 
@@ -439,7 +506,6 @@ protected:
     //脱出可能かどうかチェック
     int CheckCanEscape(Geister currentGame){
         auto legalMoves = currentGame.getLegalMove1st();
-        printf("必勝手を検索中...\n");
         //出口との距離が0の場合
         if (currentGame.IsExistUnit(0, 0) == 1){
             printf("脱出可能なコマがあります\n");

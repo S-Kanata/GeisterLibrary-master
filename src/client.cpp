@@ -18,6 +18,7 @@
 
 bool visibleResponse = false;
 int output = 2;
+std::array<int, 7> winreason({0,0,0,0,0,0,0});
 
 #ifdef _WIN32
 using HANDLE_TYPE = HMODULE;
@@ -82,13 +83,34 @@ int run(TCPClient& client, std::shared_ptr<Player> player){
     }
     std::string_view result(res.data(), 3);
     game.setState(std::string_view(&(res[4])));
+    auto enemy = game;
+    Result reason = enemy.result();
+    int resultInt = reason == Result::Draw ? 0 : static_cast<int>(reason);
+    if(resultInt == 1) winreason[0]++;
+    if(resultInt == 2) winreason[1]++;
+    if(resultInt == 3) winreason[2]++;
+    if(resultInt == -1){
+        if(enemy.exist1st(8,8)) winreason[0]++;
+        else if(enemy.exist2nd(8,8)) winreason[3]++;
+    } 
+    if(resultInt == -2) winreason[4]++;
+    if(resultInt == -3) winreason[5]++;
     player->finalize(game);
     std::map<char, double> score = {{'W', 1}, {'L', 0}, {'D', 0.1}};
     if(output > 1)
         game.printBoard();
     if(output)
         std::cout << result << ": " << turn << std::endl;
-    // client.close();
+    
+    for (int i = 0; i < 7; i++){
+        if(i == 6)
+            printf("%d\n", winreason[i]);
+        else 
+            printf("%d-", winreason[i]);
+        fflush(stdout);
+        //std::cout << winreason[i];
+    }
+    client.close();
     return score[result[0]];
 }
 
@@ -170,9 +192,10 @@ int main(int argc, char** argv){
         for (size_t i = 0; i < playCount; ++i)
         {
             run(client, player);
-            // std::this_thread::sleep_for(std::chrono::microseconds(100000));
+            std::this_thread::sleep_for(std::chrono::microseconds(10000));
         }
     }
+
 
 #ifdef _WIN32
     FreeLibrary(handle);

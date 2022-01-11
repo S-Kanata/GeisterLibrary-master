@@ -93,24 +93,39 @@ public:
         fflush(stdout);
         enemyboard.changeSide();
         
-        if(enemyboard.IsExistUnit(0,0) > 0){
-            
-            for(int i = 0; i < 16; i++){
+
+        for(int i = 0; i < 16; i++){
+            if(enemyboard.IsExistUnit(0,0) == 3){
                 if ((units[i].x()== 0)&&(units[i].y() == 0)){
                     enemyboard.setColor(i, UnitColor::Blue);
                 }
+            }
+
+            if(enemyboard.IsExistUnit(5,0) == 3){
                 if ((units[i].x()== 5)&&(units[i].y() == 0)){
                     enemyboard.setColor(i, UnitColor::Blue);
                 }
-                if ((units[i].x()== 0)&&(units[i].y() == 1)){
-                    enemyboard.setColor(i, UnitColor::Blue);
-                }
+            }
+
+            if(enemyboard.IsExistUnit(1,0) == 3){
                 if ((units[i].x()== 1)&&(units[i].y() == 0)){
                     enemyboard.setColor(i, UnitColor::Blue);
                 }
+            }
+
+            if(enemyboard.IsExistUnit(0,1) == 3){
+                if ((units[i].x()== 0)&&(units[i].y() == 1)){
+                    enemyboard.setColor(i, UnitColor::Blue);
+                }
+            }
+
+            if(enemyboard.IsExistUnit(4,0) == 3){
                 if ((units[i].x()== 4)&&(units[i].y() == 0)){
                     enemyboard.setColor(i, UnitColor::Blue);
                 }
+            }
+
+            if(enemyboard.IsExistUnit(5,1) == 3){
                 if ((units[i].x()== 5)&&(units[i].y() == 1)){
                     enemyboard.setColor(i, UnitColor::Blue);
                 }

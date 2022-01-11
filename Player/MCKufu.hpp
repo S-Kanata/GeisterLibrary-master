@@ -32,7 +32,61 @@ public:
         AfterPosition = std::vector<std::vector<int>>(16, std::vector<int>(37));
 
         std::uniform_int_distribution<int> serector(0, pattern.size() - 1);
-        return pattern[serector(mt)];
+        return "ABCD";
+        //return pattern[serector(mt)];
+    }
+
+    std::vector<std::string> getLegalPattern(Geister game){
+        std::vector<std::string> res;
+        std::vector<char> blue;
+        std::vector<char> red;
+        std::vector<char> unknown;
+        // 判明している色ごとにリスト化
+        for(int u = 8; u < 16; u++){
+            if(game.allUnit()[u].color() == UnitColor::blue)
+                blue.push_back(u - 8 + 'A');
+            else if(game.allUnit()[u].color() == UnitColor::red)
+                red.push_back(u - 8 + 'A');
+            else
+                unknown.push_back(u - 8 + 'A');
+        }
+
+        for(int i = 0; i < red.size(); i++){
+            std::cout << red[i] << std::endl;
+        }
+
+        for(int i = 0; i < blue.size(); i++){
+            std::cout << blue[i] << std::endl;
+        }
+
+        for(int i = 0; i < unknown.size(); i++){
+            std::cout << unknown[i] << std::endl;
+        }
+        game.printBoard();
+        
+        // 判明している情報と矛盾するパターンを除外
+        for(auto p: pattern){
+            // 青と分かっている駒を含むパターンを除外
+            int checkB = 0;
+            for(auto b: blue){
+                if(std::string(p).find(b) != std::string::npos){
+                    checkB++;
+                    break;
+                }
+            }
+            if(checkB != 0) continue;
+            // 赤と分かっている駒を含むパターンを除外
+            int checkR = 0;
+            for(auto r: red){
+                if(std::string(p).find(r) == std::string::npos){
+                    checkR++;
+                    break;
+                }
+            }
+            if(checkR != 0) continue;
+            res.push_back(std::string(p));
+        }
+        return res;
     }
 
     virtual std::string decideHand(std::string_view res){
@@ -51,6 +105,7 @@ public:
         auto enemy = game;
         enemy.changeSide();
         auto units = enemy.allUnit();
+        bool IsNoRed = true;
         for(int i = 0; i < 16; i++){
             if(EstimatedRed[i] == 1){
                 int pos = units[i].x() + units[i].y() * 6;
@@ -58,15 +113,34 @@ public:
                     if(!AfterPosition[i][pos]==1)
                     {
                         EnemyColor[i] = 1;
+                        IsNoRed = false;
+                        auto u = game.allUnit()[i+8];
+                        printf("Discovered red!!\n position, %d, %d\n", u.x(), u.y());
                     }
                 }
             }
         }
 
+        //見積もりが正しくなければリセット
+        for(int i = 0; i < 16; i++){
+            EstimatedRed[i] = 0;
+            for(int j = 0; j < 37; j++){
+                AfterPosition[i][j] = 0;
+            }
+        }
+
+
         for(int i = 0; i < 16; i++){
             if(EnemyColor[i]==1){
-                game.setColor(i+8, UnitColor::red);
-                printf("Discovered red!!\n position, %d, %d\n", units[i].x(), units[i].y());
+                if(game.allUnit()[i+8].color() == UnitColor::unknown){
+                    game.setColor(i+8, UnitColor::red);
+                    auto enemygame = game;
+                    auto legalPattern = getLegalPattern(enemygame);
+                    for(int i = 0; i < legalPattern.size(); i++){
+                        std::cout << legalPattern[i] << std::endl;
+                    }
+                    std::cout << legalPattern.size() << std::endl;
+                }
             }
         }
 
@@ -79,7 +153,7 @@ public:
             auto m = legalMoves[l];
             SIMULATOR s(game);
             s.root.move(m);
-            rewards[l] += s.run_WithPlob(100);
+            rewards[l] += s.run_WithPlob(10);
         }
 
         auto&& max_iter = std::max_element(rewards.begin(), rewards.end());
@@ -131,17 +205,26 @@ public:
             }
         }
 
+        units = enemyboard.allUnit();
         int canescapeenemy = CheckCanEscape(enemyboard);
+        //std::cout << canescapeenemy << std::endl;
 
         if(canescapeenemy == 1){
             for(int i = 0; i < 16; i++){
                 if ((units[i].x() == 0)&&(units[i].y() == 0)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][36] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][36] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
                 }
                 if ((units[i].x() == 5)&&(units[i].y() == 0)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][36] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][36] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
+
                 }
             }
         }
@@ -149,20 +232,32 @@ public:
         if(canescapeenemy == 3){
             for(int i = 0; i < 16; i++){
                 if ((units[i].x() == 0)&&(units[i].y() == 1)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][0] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][0] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
                 }
                 if ((units[i].x() == 1)&&(units[i].y() == 0)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][0] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][0] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
                 }
                 if ((units[i].x() == 5)&&(units[i].y() == 1)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][5] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][5] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
                 }
                 if ((units[i].x() == 4)&&(units[i].y() == 0)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][5] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][5] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
                 }
             }
         }
@@ -186,30 +281,30 @@ public:
         auto legalMoves = currentGame.getLegalMove1st();
         //出口との距離が0の場合
         if (currentGame.IsExistUnit(0, 0) == 1){
-            printf("脱出可能なコマがあります\n");
+            //printf("脱出可能なコマがあります\n");
             return 1;
         }
         if (currentGame.IsExistUnit(5, 0) == 1){
-            printf("脱出可能なコマがあります\n");
+            //printf("脱出可能なコマがあります\n");
             return 1;
         }
 
         //出口との距離が1の場合
-        if (currentGame.IsExistUnit(5, 5) != 3 && currentGame.IsExistUnit(0, 5) != 3){
-            if (!(currentGame.IsExistUnit(0, 0) == 3 && currentGame.takenCount(UnitColor::Red) == 3)){
-                if (currentGame.IsExistUnit(0, 1) == 1 && currentGame.IsExistUnit(1, 0) == 0){
+        if ((((currentGame.IsExistUnit(5, 5) < 4)||(currentGame.IsExistUnit(5, 5) == 6)) && ((currentGame.IsExistUnit(0, 5) < 4)||(currentGame.IsExistUnit(0, 5) == 6)))){
+            if (!(currentGame.takenCount(UnitColor::red) == 3)){
+                if ((currentGame.IsExistUnit(0, 1) == 1) && (currentGame.IsExistUnit(1, 0) < 4)){
                     return 3;
                 }
-                if (currentGame.IsExistUnit(1, 0) == 1 && currentGame.IsExistUnit(0, 1) == 0){
+                if ((currentGame.IsExistUnit(1, 0) == 1) && (currentGame.IsExistUnit(0, 1) < 4)){
                     return 3;
                 }
             }
 
-            if (!(currentGame.IsExistUnit(5, 0) == 3 && currentGame.takenCount(UnitColor::Red) == 3)){
-                if (currentGame.IsExistUnit(5, 1) == 1 && currentGame.IsExistUnit(4, 0) == 0){
+            if (!(currentGame.IsExistUnit(5, 0) != 6 && currentGame.takenCount(UnitColor::Red) == 3)){
+                if ((currentGame.IsExistUnit(5, 1) == 1) && (currentGame.IsExistUnit(4, 0) < 4)){
                         return 3;
                 }
-                if (currentGame.IsExistUnit(4, 0) == 1 && currentGame.IsExistUnit(5, 1) == 0){
+                if ((currentGame.IsExistUnit(4, 0) == 1) && (currentGame.IsExistUnit(5, 1) < 4)){
                         return 3;
                 }
             }

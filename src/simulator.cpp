@@ -254,7 +254,22 @@ double Simulator::run_WithPlob(const size_t count){
     double result = 0.0;
     for(size_t i = 0; i < count; ++i){
         current = root;
+        auto all = current.allUnit();
+        bool on = false;
+        int num = 0;
+        for(int i = 0; i < 16; i++){
+            if(all[i].color() == UnitColor::red){
+                if(all[i].x() != 9){
+                    on = true;
+                    num = i;
+                }
+            }
+        }
         setColor(getRandomPattern());
+        all = current.allUnit();
+        if((all[num].color() != UnitColor::red) && on){
+            std::cout << "Error!!" << std::endl;
+        }
         result += playout_WithProb();
     }
         return result;

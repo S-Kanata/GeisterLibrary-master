@@ -507,9 +507,10 @@ int Geister::IsExistUnit(int x, int y){
                 return 1;
             } else if(units[i].color() == UnitColor::Red){
                 return 2;
-            } else {
-            return 3;
-            }
+            } else if(units[i].color() == UnitColor::Unknown){
+                return 3;
+            } else 
+                return 4;
         }
     }
     return 0;

@@ -210,6 +210,7 @@ protected:
         auto enemy = game;
         enemy.changeSide();
         auto units = enemy.allUnit();
+        bool IsNoRed = true;
         for(int i = 0; i < 16; i++){
             if(EstimatedRed[i] == 1){
                 int pos = units[i].x() + units[i].y() * 6;
@@ -217,20 +218,37 @@ protected:
                     if(!AfterPosition[i][pos]==1)
                     {
                         EnemyColor[i] = 1;
+                        IsNoRed = false;
+                        auto u = game.allUnit()[i+8];
+                        printf("Discovered red!!\n position, %d, %d\n", u.x(), u.y());
                     }
                 }
             }
         }
 
+        //見積もりが正しくなければリセット
+        for(int i = 0; i < 16; i++){
+            EstimatedRed[i] = 0;
+            for(int j = 0; j < 37; j++){
+                AfterPosition[i][j] = 0;
+            }
+        }
+
         for(int i = 0; i < 16; i++){
             if(EnemyColor[i]==1){
-                game.setColor(i+8, UnitColor::red);
-                printf("Discovered red!!\n position, %d, %d\n", units[i].x(), units[i].y());
+                if(game.allUnit()[i+8].color() == UnitColor::unknown){
+                    game.setColor(i+8, UnitColor::red);
+                    auto enemygame = game;
+                    auto legalPattern = getLegalPattern(enemygame);
+                    for(int i = 0; i < legalPattern.size(); i++){
+                        std::cout << legalPattern[i] << std::endl;
+                    }
+                    std::cout << legalPattern.size() << std::endl;
+                }
             }
         }
         
         // 合法手の列挙
-        auto legalPattern = getLegalPattern(game);
         MCTNode Tree(game);
         auto legalMoves = Tree.root.getLegalMove1st();
         for(auto&& lm: legalMoves){
@@ -252,6 +270,7 @@ protected:
         for(int i = 0; i < lm.size(); ++i){
                 visits[i] += Tree.children[i].visitCount;
         }
+
         int index = 0;
         double maxVisit = visits[0];
         for(int i = 0; i < visits.size(); i++){
@@ -263,36 +282,41 @@ protected:
         }
 
         auto enemyboard = game;
-        enemyboard.move(lm[index]);
+        enemyboard.move(legalMoves[index]);
         fflush(stdout);
         enemyboard.changeSide();
-        
+
         for(int i = 0; i < 16; i++){
             if(enemyboard.IsExistUnit(0,0) == 3){
                 if ((units[i].x()== 0)&&(units[i].y() == 0)){
                     enemyboard.setColor(i, UnitColor::Blue);
                 }
             }
+
             if(enemyboard.IsExistUnit(5,0) == 3){
                 if ((units[i].x()== 5)&&(units[i].y() == 0)){
                     enemyboard.setColor(i, UnitColor::Blue);
                 }
             }
+
             if(enemyboard.IsExistUnit(1,0) == 3){
                 if ((units[i].x()== 1)&&(units[i].y() == 0)){
                     enemyboard.setColor(i, UnitColor::Blue);
                 }
             }
+
             if(enemyboard.IsExistUnit(0,1) == 3){
                 if ((units[i].x()== 0)&&(units[i].y() == 1)){
                     enemyboard.setColor(i, UnitColor::Blue);
                 }
             }
+
             if(enemyboard.IsExistUnit(4,0) == 3){
                 if ((units[i].x()== 4)&&(units[i].y() == 0)){
                     enemyboard.setColor(i, UnitColor::Blue);
                 }
             }
+
             if(enemyboard.IsExistUnit(5,1) == 3){
                 if ((units[i].x()== 5)&&(units[i].y() == 1)){
                     enemyboard.setColor(i, UnitColor::Blue);
@@ -300,17 +324,26 @@ protected:
             }
         }
 
+        units = enemyboard.allUnit();
         int canescapeenemy = CheckCanEscape(enemyboard);
+        //std::cout << canescapeenemy << std::endl;
 
         if(canescapeenemy == 1){
             for(int i = 0; i < 16; i++){
                 if ((units[i].x() == 0)&&(units[i].y() == 0)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][36] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][36] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
                 }
                 if ((units[i].x() == 5)&&(units[i].y() == 0)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][36] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][36] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
+
                 }
             }
         }
@@ -318,24 +351,38 @@ protected:
         if(canescapeenemy == 3){
             for(int i = 0; i < 16; i++){
                 if ((units[i].x() == 0)&&(units[i].y() == 1)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][0] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][0] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
                 }
                 if ((units[i].x() == 1)&&(units[i].y() == 0)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][0] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][0] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
                 }
                 if ((units[i].x() == 5)&&(units[i].y() == 1)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][5] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][5] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
                 }
                 if ((units[i].x() == 4)&&(units[i].y() == 0)){
-                    EstimatedRed[i] = 1;
-                    AfterPosition[i][5] = 1;
+                    if (units[i].color() == UnitColor::Blue){
+                        EstimatedRed[i] = 1;
+                        AfterPosition[i][5] = 1;
+                        printf("%d,%dに赤駒らしき駒を発見\n", 5-units[i].x(), 5-units[i].y());
+                    }
                 }
             }
         }
-        return lm[index];
+        
+        return legalMoves[index];
+
     }
 
     std::string decideHand_Average(){

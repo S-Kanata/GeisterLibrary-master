@@ -211,7 +211,8 @@ protected:
         enemy.changeSide();
         auto units = enemy.allUnit();
         bool IsNoRed = true;
-        for(int i = 0; i < 16; i++){
+        for(int i = 0; i < EstimatedRed.size(); i++){
+            std::cout << "Wdo";
             if(EstimatedRed[i] == 1){
                 int pos = units[i].x() + units[i].y() * 6;
                 if(pos < 37){
@@ -239,11 +240,13 @@ protected:
                 if(game.allUnit()[i+8].color() == UnitColor::unknown){
                     game.setColor(i+8, UnitColor::red);
                     auto enemygame = game;
+                    /*
                     auto legalPattern = getLegalPattern(enemygame);
                     for(int i = 0; i < legalPattern.size(); i++){
                         std::cout << legalPattern[i] << std::endl;
                     }
                     std::cout << legalPattern.size() << std::endl;
+                    */
                 }
             }
         }
@@ -561,6 +564,7 @@ protected:
 
     //脱出可能かどうかチェック
     int CheckCanEscape(Geister currentGame){
+
         auto legalMoves = currentGame.getLegalMove1st();
         //出口との距離が0の場合
         if (currentGame.IsExistUnit(0, 0) == 1){

@@ -239,11 +239,13 @@ protected:
                 if(game.allUnit()[i+8].color() == UnitColor::unknown){
                     game.setColor(i+8, UnitColor::red);
                     auto enemygame = game;
+                    /*
                     auto legalPattern = getLegalPattern(enemygame);
                     for(int i = 0; i < legalPattern.size(); i++){
                         std::cout << legalPattern[i] << std::endl;
                     }
                     std::cout << legalPattern.size() << std::endl;
+                    */
                 }
             }
         }

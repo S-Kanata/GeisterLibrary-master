@@ -32,8 +32,7 @@ public:
         AfterPosition = std::vector<std::vector<int>>(16, std::vector<int>(37));
 
         std::uniform_int_distribution<int> serector(0, pattern.size() - 1);
-        return "ABCD";
-        //return pattern[serector(mt)];
+        return pattern[serector(mt)];
     }
 
     std::vector<std::string> getLegalPattern(Geister game){
@@ -135,11 +134,13 @@ public:
                 if(game.allUnit()[i+8].color() == UnitColor::unknown){
                     game.setColor(i+8, UnitColor::red);
                     auto enemygame = game;
+                    /*
                     auto legalPattern = getLegalPattern(enemygame);
                     for(int i = 0; i < legalPattern.size(); i++){
                         std::cout << legalPattern[i] << std::endl;
                     }
                     std::cout << legalPattern.size() << std::endl;
+                    */
                 }
             }
         }

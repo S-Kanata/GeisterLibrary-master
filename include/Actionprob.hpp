@@ -77,6 +77,7 @@ double evaluate() {
                     if ((currentGame.IsExistUnit(1, 0) == 1) && (currentGame.IsExistUnit(0, 1) < 4)){
                         return 3;
                     }
+                }
             }
 
             if (!((currentGame.IsExistUnit(5, 0) > 3) && (currentGame.takenCount(UnitColor::red) == 3))){
@@ -92,7 +93,7 @@ double evaluate() {
         }
         return 0;
     }
-}
+
 
     
     /*

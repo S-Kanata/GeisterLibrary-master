@@ -280,7 +280,7 @@ public:
         return game.getLegalMove1st();
     }
 
-    //脱出可能かどうかチェック
+    //脱出可能かチェック
     int CheckCanEscape(Geister currentGame){
         auto legalMoves = currentGame.getLegalMove1st();
         //出口との距離が0の場合
@@ -295,26 +295,30 @@ public:
 
         //出口との距離が1の場合
         if ((((currentGame.IsExistUnit(5, 5) < 4)||(currentGame.IsExistUnit(5, 5) == 6)) && ((currentGame.IsExistUnit(0, 5) < 4)||(currentGame.IsExistUnit(0, 5) == 6)))){
-            if (!(currentGame.takenCount(UnitColor::red) == 3)){
-                if ((currentGame.IsExistUnit(0, 1) == 1) && (currentGame.IsExistUnit(1, 0) < 4)){
-                    return 3;
-                }
-                if ((currentGame.IsExistUnit(1, 0) == 1) && (currentGame.IsExistUnit(0, 1) < 4)){
-                    return 3;
-                }
+            if (!((currentGame.IsExistUnit(0, 0) > 3) && (currentGame.takenCount(UnitColor::red) == 3))){
+                if ((currentGame.IsExistUnit(0, 0) == 0)||(currentGame.IsExistUnit(0, 0) > 3)){
+                    if ((currentGame.IsExistUnit(0, 1) == 1) && (currentGame.IsExistUnit(1, 0) < 4)){
+                        return 3;
+                    }
+                    if ((currentGame.IsExistUnit(1, 0) == 1) && (currentGame.IsExistUnit(0, 1) < 4)){
+                        return 3;
+                    }
             }
 
-            if (!(currentGame.IsExistUnit(5, 0) != 6 && currentGame.takenCount(UnitColor::red) == 3)){
-                if ((currentGame.IsExistUnit(5, 1) == 1) && (currentGame.IsExistUnit(4, 0) < 4)){
-                        return 3;
-                }
-                if ((currentGame.IsExistUnit(4, 0) == 1) && (currentGame.IsExistUnit(5, 1) < 4)){
-                        return 3;
+            if (!((currentGame.IsExistUnit(5, 0) > 3) && (currentGame.takenCount(UnitColor::red) == 3))){
+                if ((currentGame.IsExistUnit(5, 0) == 0)||(currentGame.IsExistUnit(5, 0) > 3)){
+                    if ((currentGame.IsExistUnit(5, 1) == 1) && (currentGame.IsExistUnit(4, 0) < 4)){
+                            return 3;
+                    }
+                    if ((currentGame.IsExistUnit(4, 0) == 1) && (currentGame.IsExistUnit(5, 1) < 4)){
+                            return 3;
+                    }
                 }
             }
         }
         return 0;
     }
+}
 
     Hand Escape(Geister currentGame, int depth){
         auto legalMoves = currentGame.getLegalMove1st();

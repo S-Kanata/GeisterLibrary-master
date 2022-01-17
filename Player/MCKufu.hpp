@@ -148,13 +148,16 @@ public:
         auto legalMoves = candidateHand();
     
         SIMULATOR s0(game);
-        std::vector<double> rewards(legalMoves.size(), 0.0);
+        int size = legalMoves.size();
+
+        std::vector<double> rewards(size, 0.0);
+        int pc = 1000/size+0.9999;
         
-        for(int l = 0; l < legalMoves.size(); ++l){
+        for(int l = 0; l < size; ++l){
             auto m = legalMoves[l];
             SIMULATOR s(game);
             s.root.move(m);
-            rewards[l] += s.run_WithPlob(100);
+            rewards[l] += s.run_WithPlob(pc);
         }
 
         auto&& max_iter = std::max_element(rewards.begin(), rewards.end());
@@ -301,7 +304,7 @@ public:
                 }
             }
 
-            if (!(currentGame.IsExistUnit(5, 0) != 6 && currentGame.takenCount(UnitColor::Red) == 3)){
+            if (!(currentGame.IsExistUnit(5, 0) != 6 && currentGame.takenCount(UnitColor::red) == 3)){
                 if ((currentGame.IsExistUnit(5, 1) == 1) && (currentGame.IsExistUnit(4, 0) < 4)){
                         return 3;
                 }

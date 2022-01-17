@@ -7,7 +7,7 @@
 #include <iostream>
 
 constexpr int expandCount = 250;//PLAYOUT_COUNT * 0.1;
-constexpr double alpha = 1.4;
+constexpr double alpha = 1.5;
 
 #ifndef SIMULATOR
 #define SIMULATOR Simulator0
@@ -283,11 +283,9 @@ protected:
             }
         }
         
-        for(int i = 0; i < rewards.size(); i++){
-            std::cout << i << ":" << rewards[i] << std::endl;
-        }
 
-        std::cout << index << std::endl;
+        std::cout << "MCTS's MaxReward is :" << rewards[index] << std::endl;
+
 
         auto enemyboard = game;
         enemyboard.move(legalMoves[index]);

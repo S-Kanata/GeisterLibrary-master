@@ -7,7 +7,7 @@
 #include <iostream>
 
 constexpr int expandCount = 250;//PLAYOUT_COUNT * 0.1;
-constexpr double alpha = 1.4;
+constexpr double alpha = 1.5;
 
 #ifndef SIMULATOR
 #define SIMULATOR Simulator0
@@ -211,10 +211,10 @@ protected:
         enemy.changeSide();
         auto units = enemy.allUnit();
         bool IsNoRed = true;
-        for(int i = 0; i < 16; i++){
+        for(int i = 0; i < EstimatedRed.size(); i++){
             if(EstimatedRed[i] == 1){
                 int pos = units[i].x() + units[i].y() * 6;
-                if(pos < 37){
+                if(pos < 36){
                     if(!AfterPosition[i][pos]==1)
                     {
                         EnemyColor[i] = 1;
@@ -268,20 +268,24 @@ protected:
         }
 
         auto lm = game.getLegalMove1st();
-        std::vector<double> visits(lm.size());
+        std::vector<double> rewards(lm.size());
         for(int i = 0; i < lm.size(); ++i){
-                visits[i] += Tree.children[i].visitCount;
+                rewards[i] += Tree.children[i].reward;
         }
 
         int index = 0;
-        double maxVisit = visits[0];
-        for(int i = 0; i < visits.size(); i++){
-            double visit = visits[i];
-            if( visit > maxVisit){
-                maxVisit = visit;
+        double maxReward = rewards[0];
+        for(int i = 0; i < rewards.size(); i++){
+            double reward = rewards[i];
+            if( reward > maxReward){
+                maxReward = reward;
                 index = i;
             }
         }
+        
+
+        std::cout << "MCTS's MaxReward is :" << rewards[index] << std::endl;
+
 
         auto enemyboard = game;
         enemyboard.move(legalMoves[index]);
@@ -563,6 +567,7 @@ protected:
 
     //脱出可能かどうかチェック
     int CheckCanEscape(Geister currentGame){
+
         auto legalMoves = currentGame.getLegalMove1st();
         //出口との距離が0の場合
         if (currentGame.IsExistUnit(0, 0) == 1){
@@ -576,7 +581,7 @@ protected:
 
         //出口との距離が1の場合
         if (currentGame.IsExistUnit(5, 5) != 3 && currentGame.IsExistUnit(0, 5) != 3){
-            if (!(currentGame.IsExistUnit(0, 0) == 3 && currentGame.takenCount(UnitColor::Red) == 3)){
+            if (!(currentGame.IsExistUnit(0, 0) == 3 && currentGame.takenCount(UnitColor::red) == 3)){
                 if (currentGame.IsExistUnit(0, 1) == 1 && currentGame.IsExistUnit(1, 0) == 0){
                     return 3;
                 }
@@ -585,7 +590,7 @@ protected:
                 }
             }
 
-            if (!(currentGame.IsExistUnit(5, 0) == 3 && currentGame.takenCount(UnitColor::Red) == 3)){
+            if (!(currentGame.IsExistUnit(5, 0) == 3 && currentGame.takenCount(UnitColor::red) == 3)){
                 if (currentGame.IsExistUnit(5, 1) == 1 && currentGame.IsExistUnit(4, 0) == 0){
                         return 3;
                 }

@@ -78,7 +78,7 @@ int CanEscape(Geister currentGame){
             }
         }
 
-        if (!(currentGame.IsExistUnit(5, 0) != 6 && currentGame.takenCount(UnitColor::Red) == 3)){
+        if (!(currentGame.IsExistUnit(5, 0) != 6 && currentGame.takenCount(UnitColor::red) == 3)){
             if ((currentGame.IsExistUnit(5, 1) == 1) && (currentGame.IsExistUnit(4, 0) < 4)){
                     return 3;
             }

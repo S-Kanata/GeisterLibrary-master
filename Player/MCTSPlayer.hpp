@@ -269,9 +269,15 @@ protected:
 
         auto lm = game.getLegalMove1st();
         std::vector<double> rewards(lm.size());
+        std::vector<double> visits(lm.size());
         for(int i = 0; i < lm.size(); ++i){
                 rewards[i] += Tree.children[i].reward;
         }
+
+        for(int i = 0; i < lm.size(); ++i){
+            visits[i] += Tree.children[i].visitCount;
+        }
+
 
         int index = 0;
         double maxReward = rewards[0];
@@ -282,7 +288,17 @@ protected:
                 index = i;
             }
         }
-        
+
+        int index2 = 0;
+        double maxVisit = visits[0];
+        for(int i = 0; i < visits.size(); i++){
+            double visit = visits[i];
+            if( visit > maxVisit){
+                maxVisit = visit;
+                index2 = i;
+            }
+        }
+        index = index2;
 
         std::cout << "MCTS's MaxReward is :" << rewards[index] << std::endl;
 

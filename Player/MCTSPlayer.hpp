@@ -581,7 +581,7 @@ protected:
 
         //出口との距離が1の場合
         if (currentGame.IsExistUnit(5, 5) != 3 && currentGame.IsExistUnit(0, 5) != 3){
-            if (!(currentGame.IsExistUnit(0, 0) == 3 && currentGame.takenCount(UnitColor::Red) == 3)){
+            if (!(currentGame.IsExistUnit(0, 0) == 3 && currentGame.takenCount(UnitColor::red) == 3)){
                 if (currentGame.IsExistUnit(0, 1) == 1 && currentGame.IsExistUnit(1, 0) == 0){
                     return 3;
                 }
@@ -590,7 +590,7 @@ protected:
                 }
             }
 
-            if (!(currentGame.IsExistUnit(5, 0) == 3 && currentGame.takenCount(UnitColor::Red) == 3)){
+            if (!(currentGame.IsExistUnit(5, 0) == 3 && currentGame.takenCount(UnitColor::red) == 3)){
                 if (currentGame.IsExistUnit(5, 1) == 1 && currentGame.IsExistUnit(4, 0) == 0){
                         return 3;
                 }

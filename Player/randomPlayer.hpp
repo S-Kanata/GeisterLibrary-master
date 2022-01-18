@@ -1,7 +1,7 @@
 #include <string>
 #include "random.hpp"
 #include "player.hpp"
-#include "Actionprob.hpp"
+
 
 
 class RandomPlayer: public Player{
@@ -21,11 +21,6 @@ public:
 
     virtual std::string decideHand(std::string_view res){
         game.setState(res);
-        Hand hand;
-        auto canEscape = CanEscape(game);
-        if(canEscape > 0){
-            return EscapeHand(game, canEscape);
-        } 
 
         auto legalMoves = candidateHand();
         std::uniform_int_distribution<int> serector1(0, legalMoves.size() - 1);

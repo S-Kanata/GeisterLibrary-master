@@ -5,6 +5,7 @@
 #include <string_view>
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include <map>
 #include "random.hpp"
 #include "hand.hpp"
@@ -15,10 +16,31 @@
 #else
 #include <dlfcn.h>
 #endif
+#if __has_include(<filesystem>)
+#define FS_ENABLE
+#include <filesystem>
+#elif __has_include(<experimental/filesystem>)
+#define FS_EXPERIMENTAL_ENABLE
+#include <experimental/filesystem>
+#endif
+
+#if defined(FS_ENABLE)
+namespace fs = std::filesystem;
+#elif defined(FS_EXPERIMENTAL_ENABLE)
+namespace fs = std::experimental::filesystem;
+#endif
 
 bool visibleResponse = false;
 int output = 2;
 std::array<int, 7> winreason({0,0,0,0,0,0,0});
+bool logEnable = false;
+std::string logRoot = "log";
+std::string dllPath1, dllPath2;
+std::string dllName1, dllName2;
+#if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
+std::string logDir;
+std::ofstream digestFile;
+#endif
 
 #ifdef _WIN32
 using HANDLE_TYPE = HMODULE;
@@ -41,6 +63,29 @@ T dynamicLink(HANDLE_TYPE& handle, const char* funcName){
 }
 
 int run(TCPClient& client, std::shared_ptr<Player> player){
+#if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
+    std::ofstream logFile;
+    if(logEnable){
+        //時刻取得用
+        char fn[256];
+
+        //現在時刻取得
+        time_t now = time(NULL);
+        struct tm *pnow = localtime(&now);
+        sprintf(fn, "%04d-%02d-%02d_%02d-%02d-%02d", pnow->tm_year + 1900, pnow->tm_mon + 1, pnow->tm_mday,
+            pnow->tm_hour, pnow->tm_min, pnow->tm_sec);
+        std::string filename(fn);
+
+        constexpr const char* ext = ".txt";
+        std::string fp = logDir + "/" + dllName1 + "_" + filename + ".0" + ext;
+        fs::path filepath(fp);
+        for(int i=1; fs::exists(filepath); ++i){
+            filepath = fs::path(logDir + "/" + dllName1 + "_" + filename + "." + std::to_string(i) + ext);
+        }
+        
+        logFile.open(filepath, std::ios::out);
+    }
+#endif
     client.connect(10);
     
     Geister game;
@@ -54,6 +99,9 @@ int run(TCPClient& client, std::shared_ptr<Player> player){
         std::string_view header(res.data(), 3);
         if(visibleResponse && output > 1)
             std::cout << res << std::endl;
+#if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
+            logFile << res << std::endl;
+#endif
         if(header == "SET"){
             std::string red_ptn = player->decideRed();
             if(output > 1)
@@ -103,10 +151,17 @@ int run(TCPClient& client, std::shared_ptr<Player> player){
         std::cout << result << ": " << turn << std::endl;
     
     for (int i = 0; i < 7; i++){
-        if(i == 6)
+        if(i == 6) {
             printf("%d\n", winreason[i]);
-        else 
+#if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
+            logFile << winreason[i] << std::endl;
+#endif
+        } else {
+#if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
+            logFile << winreason[i] << "-";
+#endif
             printf("%d-", winreason[i]);
+        }
         fflush(stdout);
         //std::cout << winreason[i];
     }
@@ -132,6 +187,7 @@ int main(int argc, char** argv){
             .flag<'c', uint64_t>({'c'}, {"play"}, "N", "play count")
             .flag<'r'>({'r'}, {"visible"}, "", "visible response")
             .flag<'o', int>({'o'}, {"output"}, "N", "output level")
+            .flag<'l'>({'l'}, {"log"}, "", "enable log record")
             .argument<'d', std::vector<std::string>>("Library-Path")
             ;
         auto const opts = parse(argc, argv, cmd, argument_order::flexible);
@@ -158,8 +214,12 @@ int main(int argc, char** argv){
         if (opts.has<'r'>()) {
             visibleResponse = true;
         }
+        if (opts.has<'l'>()) {
+            logEnable = true;
+        }
         if(opts.get<'d'>().size() > 0){
             libPath = opts.get<'d'>()[0];
+            dllPath1 = libPath;
         }
         else{
             std::cerr << usage(cmd);
@@ -186,6 +246,32 @@ int main(int argc, char** argv){
         using T= Player* (*)();
         T createPlayer = dynamicLink<T>(handle, "createPlayer");
         std::shared_ptr<Player> player(createPlayer());
+
+        if(port == 10000)
+            dllName1 = "First";
+        if(port == 10001)
+            dllName1 = "Second";
+
+#if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
+    if(logEnable){
+        fs::create_directory(logRoot);
+
+        //時刻取得用
+        char dn[256];
+
+        //現在時刻取得
+        time_t now = time(NULL);
+        struct tm *pnow = localtime(&now);
+        sprintf(dn, "%04d-%02d-%02d_%02d-%02d-%02d(%d)", pnow->tm_year + 1900, pnow->tm_mon + 1, pnow->tm_mday,
+            pnow->tm_hour, pnow->tm_min, pnow->tm_sec, (int)playCount);
+        std::string dirName(dn);
+
+        logDir = logRoot + "/" + dllName1 + "/" + dirName;
+        fs::create_directories(logDir);
+
+        digestFile.open(logDir + "/" + dllName1 + "_digest.txt", std::ios::out);
+    }
+#endif
 
         TCPClient client(host, port);
 

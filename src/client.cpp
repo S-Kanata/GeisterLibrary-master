@@ -48,6 +48,20 @@ using HANDLE_TYPE = HMODULE;
 using HANDLE_TYPE = void*;
 #endif
 
+static std::string getFileName(std::string path){
+#if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
+            return fs::path(path).filename().generic_string();
+#else
+    int last = 0;
+    for(size_t i = 0; i < path.size(); ++i){
+        if(path[i] == '/' || path[i] == '\\'){
+            last = i+1;
+        }
+    }
+    return std::string(&path[last]);
+#endif
+}
+
 template<class T>
 T dynamicLink(HANDLE_TYPE& handle, const char* funcName){
 #ifdef _WIN32
@@ -99,13 +113,13 @@ int run(TCPClient& client, std::shared_ptr<Player> player){
         std::string_view header(res.data(), 3);
         if(visibleResponse && output > 1)
             std::cout << res << std::endl;
-#if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
-            logFile << res << std::endl;
-#endif
         if(header == "SET"){
             std::string red_ptn = player->decideRed();
             if(output > 1)
                 std::cout << red_ptn << std::endl;
+#if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
+                logFile << "SET:" + red_ptn << std::endl;
+#endif
             client.send("SET:" + red_ptn + "\r\n");
         }
         if(header == "WON" || header == "LST" || header == "DRW"){
@@ -118,6 +132,10 @@ int run(TCPClient& client, std::shared_ptr<Player> player){
             std::replace(res_temp.begin(), res_temp.end(), 'b', 'B');
             res = res_temp + res_temp_sub;
             game.setState(res.substr(4));
+#if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
+                auto log = res.substr(4);
+                logFile << log << std::endl;
+#endif
             turn += 1;
             if(output > 2)
                 game.printBoard();
@@ -248,9 +266,9 @@ int main(int argc, char** argv){
         std::shared_ptr<Player> player(createPlayer());
 
         if(port == 10000)
-            dllName1 = "First";
+            dllName1 = getFileName(dllPath1) + "_First";
         if(port == 10001)
-            dllName1 = "Second";
+            dllName1 = getFileName(dllPath1) + "_Second";
 
 #if defined(FS_ENABLE) || defined(FS_EXPERIMENTAL_ENABLE)
     if(logEnable){

@@ -161,6 +161,7 @@ int run(TCPClient& client, std::shared_ptr<Player> player){
     } 
     if(resultInt == -2) winreason[4]++;
     if(resultInt == -3) winreason[5]++;
+    if(resultInt == 0) winreason[6]++;
     player->finalize(game);
     std::map<char, double> score = {{'W', 1}, {'L', 0}, {'D', 0.1}};
     if(output > 1)

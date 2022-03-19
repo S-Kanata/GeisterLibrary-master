@@ -1,5 +1,5 @@
 #include "player.hpp"
-#include "Player/randomPlayer.hpp"
+#include "Player/MCTSPlayer.hpp"
 #include "geister.hpp"
 #include "hand.hpp"
 #include <iostream>

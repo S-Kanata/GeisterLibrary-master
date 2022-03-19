@@ -297,7 +297,7 @@ int main(int argc, char** argv){
         for (size_t i = 0; i < playCount; ++i)
         {
             run(client, player);
-            std::this_thread::sleep_for(std::chrono::microseconds(10000));
+            std::this_thread::sleep_for(std::chrono::microseconds(100000));
         }
     }
 

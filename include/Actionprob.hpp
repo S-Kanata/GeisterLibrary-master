@@ -350,7 +350,7 @@ int DecideIndex(std::vector<double> pies){
 }
 
 //優先度が高い手を選択
-int ReturnHand(){
+int ReturnHand(std::vector<double> pies){
     std::vector<double>::iterator iter = std::max_element(poss_pi.begin(), poss_pi.end());
     int index = std::distance(poss_pi.begin(), iter);
     return index;

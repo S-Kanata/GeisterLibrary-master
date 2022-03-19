@@ -6,8 +6,11 @@
 #include <vector>
 #include <iostream>
 
-constexpr int expandCount = 250;//PLAYOUT_COUNT * 0.1;
+constexpr int expandCount = 100;//PLAYOUT_COUNT * 0.1;
 constexpr double alpha = 1.5;
+constexpr std::chrono::seconds REMAINING_TIME(600);
+constexpr std::chrono::seconds HAND_TIME(9);
+
 
 #ifndef SIMULATOR
 #define SIMULATOR Simulator0
@@ -133,9 +136,11 @@ public:
     std::vector<int> EnemyColor; //敵駒色の推定
     std::vector<int> EstimatedRed; //敵駒色の推定
     std::vector<std::vector<int>> AfterPosition; //推定した駒の移動先
+    std::chrono::system_clock::time_point starttime;
 
     virtual std::string decideRed(){
         int pc = PLAYOUT_COUNT;
+        starttime = std::chrono::system_clock::now();
         EnemyColor = std::vector<int>(16);
         EstimatedRed = std::vector<int>(16);
         AfterPosition = std::vector<std::vector<int>>(16, std::vector<int>(37));
@@ -259,12 +264,34 @@ protected:
                 Tree.children.push_back(child);
         }
         
-        for(int i = 0; i < playoutCount; ++i){        
-                Tree.select();
-                if(i%100 == 0){
-                    printf("%d¥n", i);
-                    fflush(stdout);
+        //残り時間を表示
+        auto start = std::chrono::system_clock::now();
+        auto elapsed = start - starttime;
+        auto total = std::chrono::duration_cast<std::chrono::seconds>(elapsed);
+        std::cout << "Elapsed is " << std::endl;
+        std::cout << total.count() << std::endl;
+        bool hurryup = false;
+        if(total > REMAINING_TIME){
+            hurryup = true;
+            std::cout << "Time waits for no one!!" << std::endl;
+        }
+
+        for(int i = 0; i < playoutCount; ++i){  
+            Tree.select();
+
+            if(i%100 == 0){
+                printf("%d¥n", i);
+                fflush(stdout);
+            }
+
+            if(hurryup){
+                auto now = std::chrono::system_clock::now();
+                auto dur = now - start;
+                auto elapsedtime = std::chrono::duration_cast<std::chrono::seconds>(dur);
+                if(elapsedtime > HAND_TIME){
+                    break;
                 }
+            }
         }
 
         auto lm = game.getLegalMove1st();
